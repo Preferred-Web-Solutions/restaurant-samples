@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Hollis Street Diner | Sample restaurant website by Preferred Web Solutions</title><meta name="description" content="Hollis Street Diner sample site: breakfast all day, lunch plates and pie in Cincinnati (fictional restaurant, design sample by Preferred Web Solutions)."><style>@font-face{font-family:'Shrikhand';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/shrikhand-400-normal.woff2) format('woff2')}@font-face{font-family:'Work Sans';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/work-sans-400-normal.woff2) format('woff2')}@font-face{font-family:'Work Sans';font-style:normal;font-weight:600;font-display:swap;src:url(fonts/work-sans-600-normal.woff2) format('woff2')}@font-face{font-family:'Work Sans';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/work-sans-800-normal.woff2) format('woff2')}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-100px;z-index:200;background:var(--ink);color:var(--bg);padding:.75rem 1rem;font-weight:700;text-decoration:none;border-radius:6px}
+.skip:focus{top:12px}
+.wrap{width:100%;max-width:1200px;margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
+@media (min-width:768px){.wrap{padding-left:32px;padding-right:32px}}
+.sample-bar{background:var(--banner-bg);color:var(--banner-ink);font-size:.82rem;line-height:1.4;text-align:center;padding:.5rem 16px}
+.sample-bar strong{font-weight:700}
+.sb-short{display:none}
+@media (max-width:600px){.sb-long{display:none}.sb-short{display:inline}}
+/* Header + nav */
+.site-header{position:sticky;top:0;z-index:60;transition:box-shadow .25s,background-color .25s}
+.site-header .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:76px;transition:min-height .25s}
+.site-header.scrolled .bar{min-height:58px}
+.menu-toggle{display:none;align-items:center;gap:.5rem;min-height:44px;min-width:44px;padding:.4rem .8rem;border:2px solid currentColor;background:transparent;border-radius:var(--radius);cursor:pointer;font-weight:700}
+.menu-toggle .lines{width:18px;height:12px;position:relative;display:inline-block}
+.menu-toggle .lines::before,.menu-toggle .lines::after,.menu-toggle .lines span{content:"";position:absolute;left:0;right:0;height:2px;background:currentColor}
+.menu-toggle .lines::before{top:0}.menu-toggle .lines span{top:5px}.menu-toggle .lines::after{top:10px}
+.nav-list{display:flex;align-items:center;gap:.25rem;list-style:none;margin:0;padding:0}
+.nav-list a,.nav-list .dd-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 .8rem;text-decoration:none;cursor:pointer}
+.nav-list a:not(.btn),.nav-list .dd-btn:not(.btn){background:none;border:0}
+.dd{position:relative}
+.dd-menu{position:absolute;right:0;top:calc(100% + 6px);min-width:15rem;list-style:none;margin:0;padding:.4rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 14px 34px rgba(0,0,0,.18)}
+.dd-menu[hidden]{display:none}
+.dd-menu a{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;width:100%;min-height:48px;padding:.5rem .8rem;border-radius:calc(var(--radius) - 2px);text-decoration:none}
+.dd-menu a small{font-size:.8rem;opacity:.8}
+.dd-menu a:hover,.dd-menu a:focus-visible{background:var(--bg)}
+.caret{display:inline-block;width:.5em;height:.5em;margin-left:.45em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg)}
+@media (max-width:900px){
+ .menu-toggle{display:inline-flex}
+ .site-nav{position:absolute;left:0;right:0;top:100%;background:var(--surface);color:var(--ink);border-top:1px solid var(--line);box-shadow:0 18px 30px rgba(0,0,0,.18)}
+ .site-nav[data-open="false"]{display:none}
+ .nav-list{flex-direction:column;align-items:stretch;padding:.5rem 20px 1rem}
+ .nav-list a:not(.btn),.nav-list .dd-btn:not(.btn){min-height:52px;padding:0 .4rem;border-bottom:1px solid var(--line);width:100%;justify-content:space-between}
+ .nav-list .btn{width:100%;margin:.8rem 0 0!important;justify-content:center}
+ .dd-menu{position:static;box-shadow:none;border:0;padding:0 0 .5rem 1rem;background:transparent}
+ .nav-list .nav-cta{margin-top:.8rem;justify-content:center;border-bottom:0}
+}
+/* Slideshow */
+.slideshow{position:relative}
+.slides{position:relative}
+.slide{margin:0}
+.slide[hidden]{display:none}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slide-controls{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+.slide-controls button{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;cursor:pointer;font-weight:700}
+.slide-dots{display:flex;gap:.35rem;list-style:none;margin:0;padding:0}
+/* Marquee */
+.marquee{overflow:hidden;position:relative}
+.marquee-track{display:flex;width:max-content;animation:marquee 38s linear infinite}
+.marquee.paused .marquee-track{animation-play-state:paused}
+.marquee-track span{white-space:nowrap}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+.marquee-pause{position:absolute;right:8px;top:50%;transform:translateY(-50%);min-width:44px;min-height:44px;border-radius:999px;cursor:pointer;font-size:.8rem;font-weight:700}
+/* Forms */
+.field{display:grid;gap:.35rem;margin-bottom:1rem}
+.field label{font-weight:700}
+.field input,.field select,.field textarea{width:100%;min-height:48px;padding:.65rem .8rem;border:2px solid var(--line-strong,var(--ink));border-radius:var(--radius);background:var(--surface);color:var(--ink)}
+.field textarea{min-height:8rem;resize:vertical}
+.hint{font-size:.88rem;color:var(--muted)}
+.form-status{margin-top:.8rem;font-weight:700}
+.demo-tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .5rem;border-radius:999px;background:var(--ink);color:var(--bg)}
+/* Footer */
+.site-footer{padding-top:3.5rem;padding-bottom:2rem}
+.foot-grid{display:grid;gap:2rem;grid-template-columns:repeat(4,minmax(0,1fr))}
+.site-footer h2{font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 .8rem}
+.site-footer p{margin:0 0 .5rem}
+.site-footer a{text-underline-offset:3px}
+.foot-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.foot-legal{display:flex;flex-wrap:wrap;gap:.25rem 1rem;align-items:center;margin-top:2.5rem;padding-top:1.4rem;border-top:1px solid var(--foot-line,rgba(255,255,255,.25));font-size:.9rem}
+.foot-legal a,.foot-legal button{display:inline-flex;align-items:center;min-height:44px;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.foot-note{font-size:.85rem;opacity:.9;margin-top:1rem}
+.social{display:flex;gap:.5rem;list-style:none;padding:0;margin:.8rem 0 0}
+.social a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:1px solid currentColor;border-radius:999px;font-size:.8rem;font-weight:700;text-decoration:none}
+@media (max-width:900px){.foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.foot-grid{grid-template-columns:minmax(0,1fr)}}
+/* Consent banner */
+.consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:150;max-width:560px;background:var(--surface);color:var(--ink);border:2px solid var(--ink);border-radius:var(--radius);box-shadow:0 18px 50px rgba(0,0,0,.3);padding:1.1rem 1.2rem}
+.consent[hidden]{display:none}
+.consent h2{font-family:var(--body);font-size:1.05rem;margin:0 0 .4rem;letter-spacing:0;text-transform:none}
+.consent p{margin:0 0 .8rem;font-size:.92rem;line-height:1.5}
+.consent .row{display:flex;flex-wrap:wrap;gap:.5rem}
+.consent button.c-btn{flex:1 1 9rem;min-height:46px;padding:.5rem .9rem;border:2px solid var(--ink);border-radius:var(--radius);background:var(--surface);color:var(--ink);font-weight:700;cursor:pointer}
+.consent button.c-btn.c-main{background:var(--ink);color:var(--surface)}
+.consent .c-manage{background:none;border:0;padding:0;min-height:44px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700;margin-top:.3rem}
+.consent fieldset{border:1px solid var(--line);border-radius:var(--radius);padding:.6rem .8rem;margin:0 0 .8rem}
+.consent legend{font-weight:700;padding:0 .3rem}
+.consent label{display:flex;gap:.6rem;align-items:flex-start;min-height:44px;padding:.35rem 0;font-size:.92rem}
+.consent input[type=checkbox]{width:22px;height:22px;margin-top:.1rem;flex:none}
+@media (min-width:640px){.consent{left:20px;bottom:20px}}
+/* Legal pages */
+.legal main{padding-top:3rem;padding-bottom:4rem}
+.legal .doc{max-width:46rem}
+.legal h1{font-family:var(--display);font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.08;margin:0 0 .6rem}
+.legal h2{font-family:var(--display);font-size:1.5rem;line-height:1.2;margin:2.4rem 0 .6rem}
+.legal .meta{color:var(--muted);margin:0 0 2rem}
+.legal table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.95rem}
+.legal th,.legal td{text-align:left;vertical-align:top;padding:.6rem .5rem;border-bottom:1px solid var(--line)}
+.legal th{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase}
+.legal .table-wrap{overflow-x:auto}
+.legal .simple-head .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:72px;flex-wrap:wrap}
+.legal .home-link{font-family:var(--display);font-size:1.4rem;text-decoration:none}
+.legal .back{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+.legal .btn-plain{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.6rem 1.3rem;border:2px solid var(--ink);border-radius:var(--radius);background:var(--ink);color:var(--bg);font-weight:700;cursor:pointer;text-decoration:none}
+.legal .confirm{padding:1.5rem;border:2px solid var(--ink);border-radius:var(--radius);background:var(--surface)}
+
+/* Hollis Street Diner. Concept: the order rail and the printed guest check. Photo-first hero, tickets on a rail for weekly specials, menu printed like a diner menu card. */
+:root{--bg:#F7EEDB;--surface:#FFFBF2;--ink:#1C2529;--muted:#4A5459;--line:#DCCFB2;--line-strong:#1C2529;--accent:#B5301C;--accent-ink:#FFFFFF;--mustard:#EFAE2C;--sage:#A9C2A6;--deep:#1E4945;--focus:#1E6FD9;
+--display:"Shrikhand",Georgia,serif;--body:"Work Sans",system-ui,-apple-system,"Segoe UI",sans-serif;--radius:10px;--banner-bg:#1C2529;--banner-ink:#F7EEDB;color-scheme:light}
+.info-strip{background:var(--deep);color:#F3F7F2;font-size:.88rem;font-weight:600}
+.info-strip .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:.2rem 1.6rem;padding-top:.45rem;padding-bottom:.45rem}
+.info-strip a{text-decoration:none;display:inline-flex;align-items:center;min-height:44px;margin:-.45rem 0}
+.site-header{background:var(--bg);border-bottom:3px solid var(--ink)}
+.site-header.scrolled{box-shadow:0 8px 20px rgba(28,37,41,.12)}
+.logo{min-height:48px;justify-content:center;display:inline-flex;flex-direction:column;text-decoration:none;color:var(--accent);font:400 1.75rem/0.95 var(--display);transition:font-size .25s}
+.logo span{font:800 .75rem/1 var(--body);letter-spacing:.32em;text-transform:uppercase;color:var(--ink);margin-top:.35rem}
+.scrolled .logo{font-size:1.4rem}
+.nav-list a,.nav-list .dd-btn{font-weight:600}
+.nav-list a:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:50px;padding:.65rem 1.35rem;border:3px solid var(--ink);border-radius:var(--radius);background:var(--mustard);color:var(--ink);font:800 1rem/1.1 var(--body);text-decoration:none;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink)}
+.btn.red{background:var(--accent);color:#fff}
+.btn.light{background:var(--surface)}
+.nav-list .dd-btn.btn{padding:.5rem 1.1rem;margin-left:.5rem}
+@media (prefers-reduced-motion:reduce){.btn,.btn:hover{transition:none;transform:none}}
+.eyebrow{font:800 .8rem/1.3 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--deep);margin:0 0 1rem}
+h1,h2,h3{text-wrap:balance}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:min(86vh,760px);border-bottom:3px solid var(--ink)}
+.hero-copy{padding:clamp(2rem,5vw,4.5rem) clamp(20px,4vw,56px);display:flex;flex-direction:column;justify-content:center}
+.hero h1{font:400 clamp(2.7rem,5.4vw,4.9rem)/1.02 var(--display);margin:0 0 1.2rem;color:var(--ink)}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.lede{font-size:1.2rem;max-width:30rem;margin:0 0 1.8rem}
+.actions{display:flex;flex-wrap:wrap;gap:1rem}
+.facts{list-style:none;margin:2rem 0 0;padding:1.2rem 0 0;border-top:2px dashed var(--ink);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;font-size:.92rem}
+.facts b{display:block;font:800 .75rem var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--deep);margin-bottom:.2rem}
+.facts a{text-decoration:none;font-weight:700}
+.hero-photo{position:relative;margin:0;border-left:3px solid var(--ink);overflow:hidden;background:#2a2016}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:40% 50%}
+.ticket{position:absolute;right:clamp(16px,3vw,40px);bottom:clamp(16px,3vw,40px);width:min(16rem,62%);background:var(--surface);color:var(--ink);padding:1.4rem 1.1rem 1.5rem;font-size:.9rem;line-height:1.45;transform:rotate(-3deg);box-shadow:0 14px 30px rgba(0,0,0,.35);clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),95% 100%,90% calc(100% - 8px),85% 100%,80% calc(100% - 8px),75% 100%,70% calc(100% - 8px),65% 100%,60% calc(100% - 8px),55% 100%,50% calc(100% - 8px),45% 100%,40% calc(100% - 8px),35% 100%,30% calc(100% - 8px),25% 100%,20% calc(100% - 8px),15% 100%,10% calc(100% - 8px),5% 100%,0 calc(100% - 8px))}
+.ticket .t-head{display:flex;justify-content:space-between;font:800 .75rem var(--body);letter-spacing:.14em;text-transform:uppercase;border-bottom:2px solid var(--ink);padding-bottom:.4rem;margin-bottom:.6rem}
+.ticket .t-dish{font:400 1.3rem/1.1 var(--display);color:var(--accent);margin:0 0 .3rem}
+.ticket p{margin:0}
+.ticket .t-tot{display:flex;justify-content:space-between;margin-top:.7rem;padding-top:.5rem;border-top:2px dashed var(--ink);font-weight:800}
+/* marquee */
+.marquee{background:var(--accent);color:#fff;border-bottom:3px solid var(--ink)}
+.marquee-track{padding:.9rem 0}
+.marquee-track span{font:400 1.35rem/1 var(--display);padding-right:2.2rem}
+.marquee-track span::after{content:"\2605";font-size:.9rem;padding-left:2.2rem;color:var(--mustard)}
+.marquee-pause{background:var(--ink);color:#fff;border:2px solid #fff}
+/* sections */
+section.block{padding-top:clamp(3.5rem,7vw,6rem);padding-bottom:clamp(3.5rem,7vw,6rem)}
+.sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2rem;margin-bottom:2.4rem}
+.sec-head h2{font:400 clamp(2.1rem,4.4vw,3.4rem)/1.04 var(--display);margin:0;max-width:18ch}
+.sec-head p{max-width:32rem;margin:0}
+/* rail */
+.rail-wrap{position:relative;padding-top:30px}
+.rail-wrap::before{content:"";position:absolute;left:0;right:0;top:12px;height:14px;border-radius:7px;background:linear-gradient(#C9D0D3,#7D878C);box-shadow:0 4px 0 rgba(28,37,41,.25)}
+.rail{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1rem;list-style:none;margin:0;padding:0}
+.rail li{position:relative;background:var(--surface);padding:1.5rem 1rem 1.6rem;font-size:.95rem;box-shadow:0 8px 0 rgba(28,37,41,.12);clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),90% 100%,80% calc(100% - 8px),70% 100%,60% calc(100% - 8px),50% 100%,40% calc(100% - 8px),30% 100%,20% calc(100% - 8px),10% 100%,0 calc(100% - 8px))}
+.rail li::before{content:"";position:absolute;top:-2px;left:50%;width:38px;height:18px;margin-left:-19px;background:#4B545A;border-radius:0 0 4px 4px}
+.rail li:nth-child(odd){transform:rotate(-1.4deg)}.rail li:nth-child(even){transform:rotate(1.2deg) translateY(8px)}
+.rail .day{font:800 .78rem var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--deep)}
+.rail h3{font:400 1.3rem/1.1 var(--display);color:var(--accent);margin:.4rem 0 .4rem}
+.rail p{margin:0 0 .6rem}
+.rail .price{display:block;border-top:2px dashed var(--ink);padding-top:.45rem;font-weight:800}
+.feature{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:0;margin-top:4rem;border:3px solid var(--ink);background:var(--surface);box-shadow:8px 8px 0 var(--ink);border-radius:var(--radius);overflow:hidden}
+.feature figure{margin:0;min-height:22rem}
+.feature img{width:100%;height:100%;object-fit:cover}
+.feature .f-copy{padding:clamp(1.6rem,4vw,3rem);display:flex;flex-direction:column;justify-content:center;border-left:3px solid var(--ink)}
+.feature .tag{align-self:flex-start;background:var(--mustard);border:2px solid var(--ink);border-radius:999px;padding:.25rem .8rem;font:800 .75rem var(--body);letter-spacing:.14em;text-transform:uppercase}
+.feature h3{font:400 clamp(1.9rem,3.4vw,2.6rem)/1.05 var(--display);margin:1rem 0 .8rem}
+.feature p{margin:0 0 1.3rem}
+/* menu */
+.menu-sec{background:var(--surface);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.menu-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem}
+.board{display:flex;flex-direction:column}
+.board figure{margin:0 0 1.3rem;position:relative;border:3px solid var(--ink);border-radius:var(--radius);overflow:hidden;aspect-ratio:4/3;box-shadow:5px 5px 0 var(--ink)}
+.board figure img{width:100%;height:100%;object-fit:cover}
+.board figcaption{position:absolute;left:10px;bottom:10px;background:var(--surface);border:2px solid var(--ink);border-radius:999px;padding:.2rem .7rem;font:800 .75rem var(--body);letter-spacing:.12em;text-transform:uppercase}
+.board h3{font:400 1.9rem/1 var(--display);color:var(--accent);margin:0 0 .25rem}
+.board .when{font-size:.9rem;color:var(--muted);margin:0 0 1rem}
+.board dl{margin:0}
+.board dt{display:flex;align-items:baseline;gap:.5rem;font-weight:800}
+.board .dots{flex:1;border-bottom:2px dotted rgba(28,37,41,.4);transform:translateY(-4px);min-width:1rem}
+.board .pr{font-weight:800}
+.board dd{margin:.15rem 0 1rem;font-size:.95rem;color:var(--muted)}
+.note{margin:2.4rem 0 0;font-size:.92rem;padding:1rem 1.2rem;border:2px dashed var(--ink);border-radius:var(--radius);max-width:46rem}
+/* order band */
+.order-band{background:var(--deep);color:#F3F7F2}
+.order-band .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:2rem;align-items:center;padding-top:3.5rem;padding-bottom:3.5rem}
+.order-band h2{font:400 clamp(2rem,4vw,3.1rem)/1.05 var(--display);margin:0 0 .6rem;color:#fff}
+.order-band p{margin:0}
+.order-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.order-opts .btn{flex-direction:column;align-items:flex-start;padding:1rem 1.2rem;min-height:5rem;text-align:left}
+.order-opts .btn small{font:600 .85rem var(--body)}
+.order-band .call{margin-top:1rem;font-weight:700}
+.order-band .call a{color:#fff}
+/* slideshow */
+.show{background:var(--ink);color:#fff}
+.show .slides{height:min(78vh,680px)}
+.show .slide{position:absolute;inset:0}
+.show figcaption{position:absolute;left:0;right:0;bottom:0;padding:5rem 0 6rem;background:linear-gradient(transparent,rgba(16,22,25,.85))}
+.show figcaption .wrap{font:400 clamp(1.5rem,3vw,2.3rem)/1.15 var(--display)}
+.show figcaption small{display:block;font:600 1rem var(--body);margin-top:.4rem;opacity:.9}
+.show .slide-controls{position:absolute;left:0;right:0;bottom:1.2rem}
+.show .slide-controls .wrap{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.show .slide-controls button{background:var(--surface);color:var(--ink);border:2px solid var(--ink);padding:0 .9rem}
+.show .slide-dots button{min-width:44px;padding:0}
+.show .slide-dots button[aria-current="true"]{background:var(--mustard)}
+/* story */
+.story{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.story h2{font:400 clamp(2.1rem,4.4vw,3.3rem)/1.05 var(--display);margin:0 0 1.2rem}
+.story blockquote{margin:1.6rem 0;padding:1.2rem 1.4rem;background:var(--surface);border-left:6px solid var(--accent);font-size:1.15rem;font-weight:600}
+.story blockquote footer{font-size:.9rem;font-weight:600;color:var(--muted);margin-top:.5rem}
+.story .stack{position:relative;min-height:30rem}
+.story .stack figure{position:absolute;margin:0;border:3px solid var(--ink);background:var(--surface);padding:.6rem .6rem 0;box-shadow:6px 6px 0 var(--ink)}
+.story .stack figure img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.story .stack figcaption{font:800 .78rem var(--body);letter-spacing:.12em;text-transform:uppercase;padding:.55rem .1rem .6rem}
+.story .stack .s1{left:8px;top:0;width:72%;transform:rotate(-2deg)}
+.story .stack .s2{right:12px;bottom:0;width:58%;transform:rotate(2.5deg)}
+/* pies */
+.pies{background:var(--mustard);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.pies .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:start}
+.pies h2{font:400 clamp(2.1rem,4.4vw,3.3rem)/1.05 var(--display);margin:0 0 1rem}
+.case{list-style:none;margin:1.4rem 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
+.case li{background:var(--surface);border:2px solid var(--ink);border-radius:var(--radius);padding:.8rem 1rem;font-weight:700}
+.case li span{display:block;font-weight:500;font-size:.9rem;color:var(--muted)}
+.pie-form{background:var(--surface);border:3px solid var(--ink);border-radius:var(--radius);padding:clamp(1.3rem,3vw,2rem);box-shadow:8px 8px 0 var(--ink)}
+.pie-form h3{font:400 1.6rem/1.1 var(--display);margin:0 0 .3rem}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 1rem}
+/* reviews + news */
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem}
+.card{background:var(--surface);border:3px solid var(--ink);border-radius:var(--radius);padding:clamp(1.4rem,3vw,2.2rem);box-shadow:6px 6px 0 var(--ink)}
+.card h2{font:400 clamp(1.7rem,3vw,2.3rem)/1.08 var(--display);margin:0 0 .8rem}
+.card .btns{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.2rem}
+.inline-form{display:flex;flex-wrap:wrap;gap:.8rem;align-items:flex-end;margin-top:1rem}
+.inline-form .field{flex:1 1 14rem;margin:0}
+/* visit */
+.visit{background:var(--deep);color:#F3F7F2}
+.visit h2{font:400 clamp(2.1rem,4.4vw,3.3rem)/1.05 var(--display);margin:0 0 2rem;color:#fff}
+.visit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.4rem}
+.visit h3{font:800 .8rem var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--mustard);margin:0 0 .8rem}
+.visit p{margin:0 0 .6rem}
+.visit a:not(.btn){color:#fff}
+.visit table{width:100%;border-collapse:collapse;color:inherit;font:inherit}
+.visit td{padding:.45rem 0;border-bottom:1px dashed rgba(243,247,242,.4)}
+.visit td+td{text-align:right;font-weight:700}
+.visit .btn{margin-top:.6rem}
+.sign{display:inline-block;margin-top:1rem;background:#2F6B4F;color:#fff;border:3px solid #fff;border-radius:6px;padding:.4rem .9rem;font:800 1rem var(--body);letter-spacing:.06em;box-shadow:0 0 0 3px #2F6B4F}
+/* footer */
+.site-footer{background:var(--ink);color:#EFE6D2;--foot-line:rgba(239,230,210,.3)}
+.site-footer .f-logo{font:400 2rem/1 var(--display);color:var(--mustard);margin:0 0 .6rem}
+.site-footer h2{color:var(--mustard)}
+.site-footer .btn{box-shadow:4px 4px 0 #000;border-color:#EFE6D2}
+@media (max-width:900px){
+ .hero{grid-template-columns:minmax(0,1fr)}
+ .hero-photo{border-left:0;border-top:3px solid var(--ink);min-height:min(70vh,520px);order:-1}
+ .hero-copy{padding-top:2.2rem}
+ .rail{grid-template-columns:repeat(5,minmax(13rem,1fr));overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 4px 18px}
+ .rail li{scroll-snap-align:start}
+ .rail-wrap::before{right:-20px}
+ .feature,.story,.pies .wrap,.duo,.order-band .wrap{grid-template-columns:minmax(0,1fr)}
+ .feature .f-copy{border-left:0;border-top:3px solid var(--ink)}
+ .menu-grid,.visit-grid{grid-template-columns:minmax(0,1fr)}
+ .story .stack{min-height:24rem}
+}
+@media (max-width:700px){.show .slides{height:min(62vh,460px)}.show figcaption{padding:4rem 0 1.4rem}.show .slide-controls{position:static;padding:1rem 0 1.2rem}}
+@media (max-width:600px){.info-strip{display:none}.hero-photo{min-height:min(40vh,320px)}.ticket{display:none}.hero-copy{padding-top:1.6rem}.hero h1{font-size:2.6rem}}
+@media (max-width:560px){.facts{grid-template-columns:minmax(0,1fr)}.order-opts,.two,.case{grid-template-columns:minmax(0,1fr)}.ticket{width:min(14rem,70%);font-size:.82rem}.story .stack{min-height:20rem}.nav-list .dd-btn.btn{margin-left:0}}
+</style></head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<section id="consent" class="consent" aria-labelledby="consent-title" hidden>
+ <h2 id="consent-title" tabindex="-1">Cookie choices</h2>
+ <p>This site only stores your cookie choice in your browser. It does not use analytics, advertising or tracking tools. If any are added later, they will only load if you accept them. <a href="cookies.html">Read the Cookie Policy</a>.</p>
+ <div class="row">
+  <button type="button" class="c-btn c-main" id="c-accept">Accept all</button>
+  <button type="button" class="c-btn c-main" id="c-reject">Reject non-essential</button>
+ </div>
+ <button type="button" class="c-manage" id="consent-manage-btn" aria-expanded="false" aria-controls="consent-manage">Manage choices</button>
+ <div id="consent-manage" hidden>
+  <fieldset><legend>Choose what this site may use</legend>
+   <label><input type="checkbox" checked disabled> <span><b>Essential</b> (always on): remembers this choice.</span></label>
+   <label><input type="checkbox" id="c-analytics"> <span><b>Analytics</b>: not used on this site today.</span></label>
+   <label><input type="checkbox" id="c-marketing"> <span><b>Marketing</b>: not used on this site today.</span></label>
+  </fieldset>
+  <button type="button" class="c-btn" id="c-save">Save choices</button>
+ </div>
+</section>
+<p id="consent-saved" class="sr-only" role="status"></p>
+<p id="demo-live" class="sr-only" role="status" aria-live="polite"></p>
+<aside aria-label="Sample notice and quick info"><div class="sample-bar" role="note"><strong>Sample design by Preferred Web Solutions.</strong> <span class="sb-long">Hollis Street Diner is a fictional restaurant, not a real business. Photos are for demonstration only.</span><span class="sb-short">Fictional restaurant, not a real business.</span></div>
+<div class="info-strip"><div class="wrap"><span>412 Hollis Street, Cincinnati</span><span>Open daily 6am to 3pm</span><a href="tel:+15135550142">(513) 555-0142</a></div></div></aside>
+<header class="site-header">
+ <div class="wrap bar">
+  <a class="logo" href="#main">Hollis Street<span>Diner &middot; since 1962</span></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="lines" aria-hidden="true"><span></span></span>Navigate</button>
+  <nav id="site-nav" class="site-nav" aria-label="Main">
+   <ul class="nav-list">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#specials">Specials</a></li>
+    <li><a href="#pies">Pie orders</a></li>
+    <li><a href="#visit">Hours &amp; location</a></li>
+    <li class="dd"><button class="dd-btn btn nav-cta" type="button" aria-expanded="false" aria-controls="order-menu">Order online<span class="caret" aria-hidden="true"></span></button>
+     <ul class="dd-menu" id="order-menu" hidden>
+      <li><a href="#order" data-demo="Demo only: pickup ordering is not connected in this sample.">Pickup (demo)<small>Ready in about 15 minutes</small></a></li>
+      <li><a href="#order" data-demo="Demo only: delivery is not connected in this sample.">Delivery (demo)<small>Through a delivery partner</small></a></li>
+     </ul></li>
+   </ul>
+  </nav>
+ </div>
+</header>
+<main id="main">
+ <section class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+   <p class="eyebrow">Breakfast &amp; lunch &middot; Cincinnati</p>
+   <h1 id="hero-title">Eggs, stacks &amp; <em>bottomless</em> coffee.</h1>
+   <p class="lede">Griddle breakfast all day, hand-pattied burgers at lunch, and a pie case that is empty by two. Grab a stool at the counter or order ahead.</p>
+   <div class="actions"><a class="btn red" href="#order">Order online</a><a class="btn light" href="#menu">See the menu</a></div>
+   <ul class="facts">
+    <li><b>Open today</b>6am to 3pm</li>
+    <li><b>Call</b><a href="tel:+15135550142">(513) 555-0142</a></li>
+    <li><b>Parking</b>Free lot out back</li>
+   </ul>
+  </div>
+  <figure class="hero-photo">
+   <img src="img/diner_eggs-1600.jpg" srcset="img/diner_eggs-800.jpg 800w, img/diner_eggs-1600.jpg 1600w" width="1600" height="1066" alt="Two sunny-side-up eggs, crispy hash browns, bacon and buttered toast on a white plate" sizes="(max-width:900px) 100vw, 58vw" fetchpriority="high">
+   <figcaption class="ticket"><span class="t-head"><span>Table 4</span><span>#0214</span></span><p class="t-dish">The No. 1</p><p>Two eggs any style, hash browns, bacon, toast</p><p>Bottomless coffee</p><span class="t-tot"><span>Total</span><span>$9.25</span></span></figcaption>
+  </figure>
+ </section>
+
+ <div class="marquee" role="region" aria-label="Diner highlights">
+  <ul class="sr-only"><li>Breakfast served all day</li><li>Bottomless coffee</li><li>Pie by the slice or whole</li><li>Counter seats and booths</li><li>Cash or card</li></ul>
+  <div class="marquee-track" aria-hidden="true"><span>Breakfast served all day</span><span>Bottomless coffee</span><span>Pie by the slice or whole</span><span>Counter seats &amp; booths</span><span>Cash or card</span><span>Breakfast served all day</span><span>Bottomless coffee</span><span>Pie by the slice or whole</span><span>Counter seats &amp; booths</span><span>Cash or card</span></div>
+  <button class="marquee-pause" type="button" aria-pressed="false" aria-label="Pause scrolling text">Pause</button>
+ </div>
+
+ <section class="block" id="specials" aria-labelledby="specials-title">
+  <div class="wrap">
+   <div class="sec-head"><div><p class="eyebrow">On the rail this week</p><h2 id="specials-title">Daily specials, hung up fresh every morning.</h2></div><p>One special a day, written on a guest check and clipped to the rail above the griddle. When the check comes down, it is gone.</p></div>
+   <div class="rail-wrap"><ul class="rail" aria-label="Weekday specials">
+    <li><span class="day">Monday</span><h3>Meatloaf Plate</h3><p>Glazed meatloaf, mashed potatoes, green beans.</p><span class="price">$12.50</span></li>
+    <li><span class="day">Tuesday</span><h3>Biscuits &amp; Gravy</h3><p>Two biscuits, peppery sausage gravy, two eggs.</p><span class="price">$9.75</span></li>
+    <li><span class="day">Wednesday</span><h3>Patty Melt</h3><p>Rye, Swiss, grilled onions, fries.</p><span class="price">$11.25</span></li>
+    <li><span class="day">Thursday</span><h3>Hot Turkey</h3><p>Open-face roast turkey, gravy, cranberry.</p><span class="price">$12.00</span></li>
+    <li><span class="day">Friday</span><h3>Fish Sandwich</h3><p>Beer-battered cod, slaw, tartar, fries.</p><span class="price">$12.75</span></li>
+   </ul></div>
+   <article class="feature" aria-labelledby="feature-title">
+    <figure><img src="img/diner_chicken-1600.jpg" srcset="img/diner_chicken-800.jpg 800w, img/diner_chicken-1600.jpg 1600w" width="1600" height="1489" alt="Crispy fried chicken on a golden waffle with syrup pouring over it, orange juice behind" sizes="(max-width:900px) 100vw, 58vw" loading="lazy"></figure>
+    <div class="f-copy"><span class="tag">Weekends only</span><h3 id="feature-title">Chicken &amp; waffles, Saturday and Sunday.</h3><p>Buttermilk fried chicken on a malted waffle with hot honey and warm syrup. We make 60 a day.</p><a class="btn" href="#order">Order online</a></div>
+   </article>
+  </div>
+ </section>
+
+ <section class="block menu-sec" id="menu" aria-labelledby="menu-title">
+  <div class="wrap">
+   <div class="sec-head"><div><p class="eyebrow">The menu</p><h2 id="menu-title">Printed fresh, just like the one on the counter.</h2></div><p>The favorites, typed out so they are easy to read on any phone. A real site carries the restaurant's full, current menu.</p></div>
+   <div class="menu-grid">
+    <div class="board">
+     <figure><img src="img/diner_booth-1600.jpg" srcset="img/diner_booth-800.jpg 800w, img/diner_booth-1600.jpg 1600w" width="1600" height="725" alt="Fried eggs, sausage and toast beside a plate of powdered pancakes on a checkered table" sizes="(max-width:900px) 100vw, 33vw" loading="lazy"><figcaption>Served all day</figcaption></figure>
+     <h3>Breakfast</h3><p class="when">Every hour we are open</p>
+     <dl>
+      <div><dt><span>Two-Egg Plate</span><span class="dots" aria-hidden="true"></span><span class="pr">$8.50</span></dt><dd>Eggs any style, hash browns, toast, bacon or sausage.</dd></div>
+      <div><dt><span>Corned Beef Hash</span><span class="dots" aria-hidden="true"></span><span class="pr">$11.00</span></dt><dd>Crispy house hash, two eggs, rye toast.</dd></div>
+      <div><dt><span>Western Omelet</span><span class="dots" aria-hidden="true"></span><span class="pr">$10.50</span></dt><dd>Ham, peppers, onion, cheddar, hash browns.</dd></div>
+      <div><dt><span>Biscuits &amp; Gravy</span><span class="dots" aria-hidden="true"></span><span class="pr">$8.00</span></dt><dd>Two biscuits under sausage gravy.</dd></div>
+     </dl>
+    </div>
+    <div class="board">
+     <figure><img src="img/diner_pancakes-1600.jpg" srcset="img/diner_pancakes-800.jpg 800w, img/diner_pancakes-1600.jpg 1600w" width="1600" height="1729" alt="Overhead view of a buttered pancake and a plate of scrambled eggs and hash browns on a diner table" sizes="(max-width:900px) 100vw, 33vw" loading="lazy"><figcaption>Off the griddle</figcaption></figure>
+     <h3>Griddle &amp; sweets</h3><p class="when">Add berries or chocolate chips, $1.50</p>
+     <dl>
+      <div><dt><span>Short Stack</span><span class="dots" aria-hidden="true"></span><span class="pr">$7.25</span></dt><dd>Three buttermilk pancakes, whipped butter, warm syrup.</dd></div>
+      <div><dt><span>Malted Waffle</span><span class="dots" aria-hidden="true"></span><span class="pr">$8.25</span></dt><dd>Crisp outside, soft inside, powdered sugar.</dd></div>
+      <div><dt><span>French Toast</span><span class="dots" aria-hidden="true"></span><span class="pr">$9.00</span></dt><dd>Thick-cut challah, cinnamon, maple.</dd></div>
+      <div><dt><span>Slice of Pie</span><span class="dots" aria-hidden="true"></span><span class="pr">$4.50</span></dt><dd>Whatever is in the case today. Add a scoop, $1.75.</dd></div>
+     </dl>
+    </div>
+    <div class="board">
+     <figure><img src="img/diner_stools-1600.jpg" srcset="img/diner_stools-800.jpg 800w, img/diner_stools-1600.jpg 1600w" width="1600" height="1238" alt="Row of chrome diner stools with sage green seats along a wood-paneled counter, with a white table and leather chairs" sizes="(max-width:900px) 100vw, 33vw" loading="lazy"><figcaption>11am until close</figcaption></figure>
+     <h3>Lunch plates</h3><p class="when">Comes with fries or a cup of soup</p>
+     <dl>
+      <div><dt><span>Hollis Burger</span><span class="dots" aria-hidden="true"></span><span class="pr">$10.50</span></dt><dd>Griddled patty, American cheese, pickles, onion.</dd></div>
+      <div><dt><span>Club Sandwich</span><span class="dots" aria-hidden="true"></span><span class="pr">$11.75</span></dt><dd>Turkey, bacon, lettuce, tomato, triple-decker.</dd></div>
+      <div><dt><span>Grilled Cheese &amp; Tomato Soup</span><span class="dots" aria-hidden="true"></span><span class="pr">$8.75</span></dt><dd>Sourdough, sharp cheddar, a bowl of soup.</dd></div>
+      <div><dt><span>Thick Shake</span><span class="dots" aria-hidden="true"></span><span class="pr">$5.75</span></dt><dd>Vanilla, chocolate or strawberry.</dd></div>
+     </dl>
+    </div>
+   </div>
+   <p class="note"><b>Good to know:</b> prices and availability can change. Please tell us about any allergies before ordering.</p>
+  </div>
+ </section>
+
+ <section class="order-band" id="order" aria-labelledby="order-title">
+  <div class="wrap">
+   <div><h2 id="order-title">Order online, skip the wait.</h2><p>Pick it up at the counter in about 15 minutes, or have it brought to you.</p><p class="call">Rather call? <a href="tel:+15135550142">(513) 555-0142</a></p></div>
+   <div class="order-opts">
+    <a class="btn" href="#order" data-demo="Demo only: pickup ordering is not connected in this sample.">Pickup (demo)<small>Order ahead, grab it at the counter</small></a>
+    <a class="btn light" href="#order" data-demo="Demo only: delivery is not connected in this sample.">Delivery (demo)<small>Through a delivery partner</small></a>
+   </div>
+  </div>
+ </section>
+
+ <section class="show" aria-labelledby="show-title">
+  <h2 id="show-title" class="sr-only">A morning at Hollis Street, photo slideshow</h2>
+  <div class="slideshow" data-slideshow>
+   <div class="slides" aria-live="off">
+    <figure class="slide"><img src="img/diner_stools-1600.jpg" srcset="img/diner_stools-800.jpg 800w, img/diner_stools-1600.jpg 1600w" width="1600" height="1238" alt="Sage green counter stools and a set table in the morning light" sizes="100vw" loading="lazy"><figcaption><div class="wrap">Counter seats open at 6am.<small>First pot of coffee is on before the door unlocks.</small></div></figcaption></figure>
+    <figure class="slide" hidden><img src="img/diner_pancakes-1600.jpg" srcset="img/diner_pancakes-800.jpg 800w, img/diner_pancakes-1600.jpg 1600w" width="1600" height="1729" alt="Hands cutting into a buttered pancake next to a plate of eggs" sizes="100vw" loading="lazy"><figcaption><div class="wrap">The short stack.<small>Buttermilk batter, mixed every morning.</small></div></figcaption></figure>
+    <figure class="slide" hidden><img src="img/diner_lamps-1600.jpg" srcset="img/diner_lamps-800.jpg 800w, img/diner_lamps-1600.jpg 1600w" width="1600" height="704" alt="Glass pendant lamps hanging over the counter and kitchen shelves" sizes="100vw" loading="lazy"><figcaption><div class="wrap">Under the pendant lights.<small>Same counter, new neighbors every morning.</small></div></figcaption></figure>
+    <figure class="slide" hidden><img src="img/diner_chicken-1600.jpg" srcset="img/diner_chicken-800.jpg 800w, img/diner_chicken-1600.jpg 1600w" width="1600" height="1489" alt="Fried chicken on a waffle with syrup" sizes="100vw" loading="lazy"><figcaption><div class="wrap">Weekend chicken &amp; waffles.<small>Sixty a day, until they are gone.</small></div></figcaption></figure>
+    <figure class="slide" hidden><img src="img/diner_counter-1600.jpg" srcset="img/diner_counter-800.jpg 800w, img/diner_counter-1600.jpg 1600w" width="1600" height="1218" alt="Chrome condiment caddy and a white coffee cup on the diner counter" sizes="100vw" loading="lazy"><figcaption><div class="wrap">Everything within reach.<small>Ketchup, hot sauce and a fresh cup.</small></div></figcaption></figure>
+    <figure class="slide" hidden><img src="img/diner_booth-1600.jpg" srcset="img/diner_booth-800.jpg 800w, img/diner_booth-1600.jpg 1600w" width="1600" height="725" alt="Breakfast plates on a checkered tablecloth in a booth" sizes="100vw" loading="lazy"><figcaption><div class="wrap">Booths by the window.<small>Room for the whole family and the Sunday paper.</small></div></figcaption></figure>
+   </div>
+   <div class="slide-controls"><div class="wrap">
+    <button class="slide-prev" type="button" aria-label="Previous photo">&larr;</button>
+    <ul class="slide-dots"><li><button type="button" aria-label="Photo 1 of 6">1</button></li><li><button type="button" aria-label="Photo 2 of 6">2</button></li><li><button type="button" aria-label="Photo 3 of 6">3</button></li><li><button type="button" aria-label="Photo 4 of 6">4</button></li><li><button type="button" aria-label="Photo 5 of 6">5</button></li><li><button type="button" aria-label="Photo 6 of 6">6</button></li></ul>
+    <button class="slide-next" type="button" aria-label="Next photo">&rarr;</button>
+    <button class="slide-play" type="button" aria-label="Pause slideshow"><span class="lbl">Pause</span></button>
+   </div></div>
+  </div>
+ </section>
+
+ <section class="block" id="story" aria-labelledby="story-title">
+  <div class="wrap story">
+   <div>
+    <p class="eyebrow">Our story</p>
+    <h2 id="story-title">Same counter since 1962.</h2>
+    <p>Ruth Hollis opened the counter with eight stools and one griddle. Her grandson Danny runs it now, and the pancake batter is still mixed by hand before the sun comes up.</p>
+    <blockquote><p>"Half our regulars order before they sit down. The other half just nod, and we know."</p><footer>Danny Hollis, owner</footer></blockquote>
+    <p class="hint">This story and quote are invented for the sample. On a real site, they come from the owner.</p>
+   </div>
+   <div class="stack">
+    <figure class="s1"><img src="img/diner_lamps-1600.jpg" srcset="img/diner_lamps-800.jpg 800w, img/diner_lamps-1600.jpg 1600w" width="1600" height="704" alt="Pendant lights over the diner counter and kitchen" sizes="(max-width:900px) 72vw, 36vw" loading="lazy"><figcaption>The counter, 6:02am</figcaption></figure>
+    <figure class="s2"><img src="img/diner_counter-1600.jpg" srcset="img/diner_counter-800.jpg 800w, img/diner_counter-1600.jpg 1600w" width="1600" height="1218" alt="Condiment caddy and coffee cup on the counter" sizes="(max-width:900px) 58vw, 29vw" loading="lazy"><figcaption>Coffee's on</figcaption></figure>
+   </div>
+  </div>
+ </section>
+
+ <section class="block pies" id="pies" aria-labelledby="pies-title">
+  <div class="wrap">
+   <div>
+    <p class="eyebrow">From the pie case</p>
+    <h2 id="pies-title">Whole pies for your table.</h2>
+    <p>Baked every morning. Order a whole pie two days ahead and pick it up warm. Holiday dates fill up fast.</p>
+    <ul class="case">
+     <li>Dutch Apple<span>$22 whole</span></li><li>Sour Cherry<span>$24 whole</span></li><li>Chocolate Cream<span>$24 whole</span></li><li>Pumpkin (fall)<span>$20 whole</span></li>
+    </ul>
+   </div>
+   <form class="pie-form" data-demo-form aria-labelledby="pie-form-title" novalidate>
+    <h3 id="pie-form-title">Order a whole pie</h3>
+    <p><span class="demo-tag">Working demo</span> Not connected yet.</p>
+    <div class="field"><label for="p-name">Name</label><input id="p-name" name="name" required autocomplete="name"></div>
+    <div class="two">
+     <div class="field"><label for="p-phone">Phone</label><input id="p-phone" name="phone" type="tel" required autocomplete="tel"></div>
+     <div class="field"><label for="p-date">Pickup date</label><input id="p-date" name="date" type="date" required></div>
+    </div>
+    <div class="field"><label for="p-pie">Pie</label><select id="p-pie" name="pie"><option>Dutch Apple</option><option>Sour Cherry</option><option>Chocolate Cream</option><option>Pumpkin</option></select></div>
+    <button class="btn red" type="submit">Request my pie</button>
+    <p class="form-status" role="status" aria-live="polite"></p>
+   </form>
+  </div>
+ </section>
+
+ <section class="block" aria-label="Reviews and email list">
+  <div class="wrap duo">
+   <div class="card">
+    <p class="eyebrow">What neighbors say</p>
+    <h2>Real reviews, straight from Google.</h2>
+    <p>A real site links to the restaurant's own Google and Yelp pages and shows its actual star rating. We never write reviews or copy them from other sites.</p>
+    <div class="btns"><a class="btn light" href="#main" data-demo="Demo only: this would open the restaurant's Google reviews.">Read reviews on Google (demo)</a></div>
+   </div>
+   <div class="card">
+    <p class="eyebrow">Pie of the month</p>
+    <h2>Get the new flavor first.</h2>
+    <p>One short email a month with the new pie and holiday order dates. Unsubscribe any time.</p>
+    <form class="inline-form" data-demo-form novalidate>
+     <div class="field"><label for="n-email">Email address</label><input id="n-email" name="email" type="email" required autocomplete="email"></div>
+     <button class="btn" type="submit">Sign me up</button>
+     <p class="form-status" role="status" aria-live="polite" style="flex-basis:100%;margin:0"></p>
+    </form>
+   </div>
+  </div>
+ </section>
+
+ <section class="block visit" id="visit" aria-labelledby="visit-title">
+  <div class="wrap">
+   <p class="eyebrow" style="color:var(--mustard)">Come on in</p>
+   <h2 id="visit-title">Find us on Hollis Street.</h2>
+   <div class="visit-grid">
+    <div><h3>Hours</h3><table><tbody>
+     <tr><td>Monday to Friday</td><td>6am to 3pm</td></tr>
+     <tr><td>Saturday</td><td>7am to 3pm</td></tr>
+     <tr><td>Sunday</td><td>7am to 2pm</td></tr></tbody></table>
+     <p style="margin-top:.8rem;font-size:.9rem">Breakfast is served every hour we are open.</p></div>
+    <div><h3>Location</h3><p>412 Hollis Street<br>Cincinnati, Ohio 45202</p><p>Free lot behind the building. Street parking on Hollis.</p><span class="sign" aria-hidden="true">Hollis St</span>
+     <p><a class="btn light" href="#visit" data-demo="Demo only: this would open driving directions.">Get directions (demo)</a></p></div>
+    <div><h3>Order &amp; contact</h3><p><a href="tel:+15135550142">(513) 555-0142</a></p><p>Walk-ins welcome. Groups of 8 or more, please call ahead.</p><a class="btn" href="#order">Order online</a></div>
+   </div>
+   <p style="margin-top:2rem;font-size:.88rem;opacity:.9">Sample address, hours and phone number. On a real site, these are confirmed with the owner.</p>
+  </div>
+ </section>
+</main>
+<footer class="site-footer">
+ <div class="wrap">
+  <div class="foot-grid">
+   <div><p class="f-logo">Hollis Street Diner</p><p>Breakfast &amp; lunch counter since 1962.</p><div class="foot-actions"><a class="btn" href="#order">Order online</a></div></div>
+   <div><h2>Location</h2><p>412 Hollis Street<br>Cincinnati, Ohio 45202</p></div>
+   <div><h2>Hours</h2><p>Mon to Fri, 6am to 3pm<br>Sat, 7am to 3pm<br>Sun, 7am to 2pm</p></div>
+   <div><h2>Contact</h2><p><a href="tel:+15135550142">(513) 555-0142</a></p><ul class="social"><li><a href="#main" data-demo="Demo only: this would open Instagram." ><span aria-hidden="true">IG</span><span class="sr-only">Instagram (demo)</span></a></li><li><a href="#main" data-demo="Demo only: this would open Facebook." ><span aria-hidden="true">FB</span><span class="sr-only">Facebook (demo)</span></a></li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="Legal">
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms &amp; Conditions</a>
+  <a href="cookies.html">Cookie Policy</a>
+  <a href="accessibility.html">Accessibility statement</a>
+  <a href="report.html">Report a website issue</a>
+  <button type="button" data-cookie-settings>Cookie settings</button>
+ </nav>
+  <p class="foot-note">Sample website designed by Preferred Web Solutions &middot; <a href="mailto:preferredwebsolutions@gmail.com">preferredwebsolutions@gmail.com</a>. Hollis Street Diner is a made-up business used to show what a restaurant site can look like. Menu, prices, hours, address and story are invented.</p>
+ </div>
+</footer>
+
+<script>
+(function(){
+  var KEY='pws-consent', VER='1.0';
+  function lsGet(){try{return window.localStorage.getItem(KEY)}catch(e){return null}}
+  function lsSet(v){try{window.localStorage.setItem(KEY,v)}catch(e){}}
+  var banner=document.getElementById('consent');
+  var opener=null;
+  function current(){try{var v=JSON.parse(lsGet());return v&&v.version===VER?v:null}catch(e){return null}}
+  function showManage(on){var p=document.getElementById('consent-manage');var b=document.getElementById('consent-manage-btn');if(!p)return;p.hidden=!on;b.setAttribute('aria-expanded',on?'true':'false');}
+  function openBanner(fromUser){
+    if(!banner)return;
+    var c=current();
+    if(c){document.getElementById('c-analytics').checked=!!c.analytics;document.getElementById('c-marketing').checked=!!c.marketing;}
+    banner.hidden=false;
+    if(fromUser){opener=document.activeElement;showManage(true);document.getElementById('consent-title').focus();}
+  }
+  function save(a,m){
+    lsSet(JSON.stringify({version:VER,essential:true,analytics:a,marketing:m,savedAt:new Date().toISOString()}));
+    banner.hidden=true;showManage(false);
+    var s=document.getElementById('consent-saved');if(s){s.textContent='Your cookie choice was saved.';}
+    if(opener&&opener.focus){opener.focus();opener=null;}
+    // This site loads no analytics or marketing tools. If any are added later, load them here only when a or m is true.
+  }
+  if(banner){
+    document.getElementById('c-accept').addEventListener('click',function(){save(true,true)});
+    document.getElementById('c-reject').addEventListener('click',function(){save(false,false)});
+    document.getElementById('c-save').addEventListener('click',function(){save(document.getElementById('c-analytics').checked,document.getElementById('c-marketing').checked)});
+    document.getElementById('consent-manage-btn').addEventListener('click',function(){var p=document.getElementById('consent-manage');showManage(p.hidden)});
+    document.querySelectorAll('[data-cookie-settings]').forEach(function(b){b.addEventListener('click',function(){openBanner(true)})});
+    if(!current())openBanner(false);
+  }
+  // Header: shrink on scroll
+  var header=document.querySelector('.site-header');
+  if(header){var onS=function(){header.classList.toggle('scrolled',window.scrollY>40)};window.addEventListener('scroll',onS,{passive:true});onS();}
+  // Mobile menu
+  var toggle=document.querySelector('.menu-toggle'),nav=document.getElementById('site-nav');
+  if(toggle&&nav){
+    var mq=window.matchMedia('(max-width:900px)');
+    var setOpen=function(o){toggle.setAttribute('aria-expanded',o?'true':'false');nav.setAttribute('data-open',o?'true':'false');};
+    var sync=function(){if(!mq.matches){nav.removeAttribute('data-open');toggle.setAttribute('aria-expanded','false')}else if(!nav.hasAttribute('data-open')){setOpen(false)}};
+    toggle.addEventListener('click',function(){setOpen(toggle.getAttribute('aria-expanded')!=='true')});
+    nav.addEventListener('click',function(e){if(e.target.closest('a')&&mq.matches)setOpen(false)});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mq.matches&&toggle.getAttribute('aria-expanded')==='true'){setOpen(false);toggle.focus();}});
+    if(mq.addEventListener)mq.addEventListener('change',sync);sync();
+  }
+  // Dropdowns
+  document.querySelectorAll('.dd').forEach(function(dd){
+    var btn=dd.querySelector('.dd-btn'),menu=dd.querySelector('.dd-menu');
+    var set=function(o){btn.setAttribute('aria-expanded',o?'true':'false');menu.hidden=!o;};
+    btn.addEventListener('click',function(){set(menu.hidden)});
+    dd.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){set(false);btn.focus();}});
+    document.addEventListener('click',function(e){if(!dd.contains(e.target))set(false)});
+    dd.addEventListener('focusout',function(e){if(e.relatedTarget&&!dd.contains(e.relatedTarget))set(false)});
+  });
+  // Demo links: explain instead of navigating
+  document.querySelectorAll('[data-demo]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var live=document.getElementById('demo-live');if(live){live.textContent='';setTimeout(function(){live.textContent=a.getAttribute('data-demo')},40);} });});
+  // Demo forms
+  document.querySelectorAll('form[data-demo-form]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var s=f.querySelector('.form-status');if(!f.checkValidity()){f.reportValidity();return;}s.textContent='This is a working demo and is not connected yet, so nothing was sent.';});});
+  // Slideshows
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-slideshow]').forEach(function(root){
+    var slides=[].slice.call(root.querySelectorAll('.slide')),dots=[].slice.call(root.querySelectorAll('.slide-dots button'));
+    var play=root.querySelector('.slide-play'),live=root.querySelector('.slides'),i=0,timer=null,playing=!reduce;
+    function show(n){i=(n+slides.length)%slides.length;slides.forEach(function(s,k){s.hidden=k!==i});dots.forEach(function(d,k){if(k===i)d.setAttribute('aria-current','true');else d.removeAttribute('aria-current')});}
+    function stop(){clearInterval(timer);timer=null;}
+    function start(){stop();if(playing)timer=setInterval(function(){show(i+1)},7000);}
+    function setPlaying(p){playing=p;play.setAttribute('aria-label',p?'Pause slideshow':'Play slideshow');play.querySelector('.lbl').textContent=p?'Pause':'Play';live.setAttribute('aria-live',p?'off':'polite');start();}
+    root.querySelector('.slide-prev').addEventListener('click',function(){show(i-1);});
+    root.querySelector('.slide-next').addEventListener('click',function(){show(i+1);});
+    dots.forEach(function(d,k){d.addEventListener('click',function(){show(k)})});
+    play.addEventListener('click',function(){setPlaying(!playing)});
+    root.addEventListener('mouseenter',stop);root.addEventListener('mouseleave',start);
+    root.addEventListener('focusin',stop);root.addEventListener('focusout',function(e){if(!root.contains(e.relatedTarget))start()});
+    show(0);setPlaying(playing);
+  });
+  // Marquee pause
+  document.querySelectorAll('.marquee').forEach(function(m){var b=m.querySelector('.marquee-pause');if(!b)return;if(reduce){b.hidden=true;return;}b.addEventListener('click',function(){var p=m.classList.toggle('paused');b.setAttribute('aria-pressed',p?'true':'false');b.textContent=p?'Play':'Pause';});});
+  // Report form
+  var rf=document.getElementById('report-form');
+  if(rf){var pf=document.getElementById('r-page');if(pf&&!pf.value)pf.value=document.referrer||'';
+    rf.addEventListener('submit',function(e){e.preventDefault();if(!rf.checkValidity()){rf.reportValidity();return;}
+      var st=rf.querySelector('.form-status');st.textContent='Sending...';
+      fetch(rf.action,{method:'POST',body:new FormData(rf),headers:{'Accept':'application/json'}}).then(function(r){
+        if(!r.ok)throw new Error('bad');var c=document.getElementById('report-confirm');rf.hidden=true;c.hidden=false;c.querySelector('h2').focus();
+      }).catch(function(){st.textContent='Sorry, the report could not be sent from here. Please email preferredwebsolutions@gmail.com instead.';});
+    });}
+})();
+</script>
+</body>
+</html>

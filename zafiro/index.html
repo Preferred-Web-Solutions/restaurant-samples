@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow"><title>Cantina Zafiro | Sample restaurant website by Preferred Web Solutions</title><meta name="description" content="Cantina Zafiro sample site: tacos, chilaquiles and margaritas in Cincinnati (fictional restaurant, design sample by Preferred Web Solutions)."><style>@font-face{font-family:'Rozha One';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/rozha-one-400-normal.woff2) format('woff2')}@font-face{font-family:'Karla';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/karla-400-normal.woff2) format('woff2')}@font-face{font-family:'Karla';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/karla-700-normal.woff2) format('woff2')}@font-face{font-family:'Karla';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/karla-800-normal.woff2) format('woff2')}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-100px;z-index:200;background:var(--ink);color:var(--bg);padding:.75rem 1rem;font-weight:700;text-decoration:none;border-radius:6px}
+.skip:focus{top:12px}
+.wrap{width:100%;max-width:1200px;margin-left:auto;margin-right:auto;padding-left:20px;padding-right:20px}
+@media (min-width:768px){.wrap{padding-left:32px;padding-right:32px}}
+.sample-bar{background:var(--banner-bg);color:var(--banner-ink);font-size:.82rem;line-height:1.4;text-align:center;padding:.5rem 16px}
+.sample-bar strong{font-weight:700}
+.sb-short{display:none}
+@media (max-width:600px){.sb-long{display:none}.sb-short{display:inline}}
+/* Header + nav */
+.site-header{position:sticky;top:0;z-index:60;transition:box-shadow .25s,background-color .25s}
+.site-header .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:76px;transition:min-height .25s}
+.site-header.scrolled .bar{min-height:58px}
+.menu-toggle{display:none;align-items:center;gap:.5rem;min-height:44px;min-width:44px;padding:.4rem .8rem;border:2px solid currentColor;background:transparent;border-radius:var(--radius);cursor:pointer;font-weight:700}
+.menu-toggle .lines{width:18px;height:12px;position:relative;display:inline-block}
+.menu-toggle .lines::before,.menu-toggle .lines::after,.menu-toggle .lines span{content:"";position:absolute;left:0;right:0;height:2px;background:currentColor}
+.menu-toggle .lines::before{top:0}.menu-toggle .lines span{top:5px}.menu-toggle .lines::after{top:10px}
+.nav-list{display:flex;align-items:center;gap:.25rem;list-style:none;margin:0;padding:0}
+.nav-list a,.nav-list .dd-btn{display:inline-flex;align-items:center;min-height:44px;padding:0 .8rem;text-decoration:none;cursor:pointer}
+.nav-list a:not(.btn),.nav-list .dd-btn:not(.btn){background:none;border:0}
+.dd{position:relative}
+.dd-menu{position:absolute;right:0;top:calc(100% + 6px);min-width:15rem;list-style:none;margin:0;padding:.4rem;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 14px 34px rgba(0,0,0,.18)}
+.dd-menu[hidden]{display:none}
+.dd-menu a{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;width:100%;min-height:48px;padding:.5rem .8rem;border-radius:calc(var(--radius) - 2px);text-decoration:none}
+.dd-menu a small{font-size:.8rem;opacity:.8}
+.dd-menu a:hover,.dd-menu a:focus-visible{background:var(--bg)}
+.caret{display:inline-block;width:.5em;height:.5em;margin-left:.45em;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg)}
+@media (max-width:900px){
+ .menu-toggle{display:inline-flex}
+ .site-nav{position:absolute;left:0;right:0;top:100%;background:var(--surface);color:var(--ink);border-top:1px solid var(--line);box-shadow:0 18px 30px rgba(0,0,0,.18)}
+ .site-nav[data-open="false"]{display:none}
+ .nav-list{flex-direction:column;align-items:stretch;padding:.5rem 20px 1rem}
+ .nav-list a:not(.btn),.nav-list .dd-btn:not(.btn){min-height:52px;padding:0 .4rem;border-bottom:1px solid var(--line);width:100%;justify-content:space-between}
+ .nav-list .btn{width:100%;margin:.8rem 0 0!important;justify-content:center}
+ .dd-menu{position:static;box-shadow:none;border:0;padding:0 0 .5rem 1rem;background:transparent}
+ .nav-list .nav-cta{margin-top:.8rem;justify-content:center;border-bottom:0}
+}
+/* Slideshow */
+.slideshow{position:relative}
+.slides{position:relative}
+.slide{margin:0}
+.slide[hidden]{display:none}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slide-controls{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem}
+.slide-controls button{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;cursor:pointer;font-weight:700}
+.slide-dots{display:flex;gap:.35rem;list-style:none;margin:0;padding:0}
+/* Marquee */
+.marquee{overflow:hidden;position:relative}
+.marquee-track{display:flex;width:max-content;animation:marquee 38s linear infinite}
+.marquee.paused .marquee-track{animation-play-state:paused}
+.marquee-track span{white-space:nowrap}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+.marquee-pause{position:absolute;right:8px;top:50%;transform:translateY(-50%);min-width:44px;min-height:44px;border-radius:999px;cursor:pointer;font-size:.8rem;font-weight:700}
+/* Forms */
+.field{display:grid;gap:.35rem;margin-bottom:1rem}
+.field label{font-weight:700}
+.field input,.field select,.field textarea{width:100%;min-height:48px;padding:.65rem .8rem;border:2px solid var(--line-strong,var(--ink));border-radius:var(--radius);background:var(--surface);color:var(--ink)}
+.field textarea{min-height:8rem;resize:vertical}
+.hint{font-size:.88rem;color:var(--muted)}
+.form-status{margin-top:.8rem;font-weight:700}
+.demo-tag{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .5rem;border-radius:999px;background:var(--ink);color:var(--bg)}
+/* Footer */
+.site-footer{padding-top:3.5rem;padding-bottom:2rem}
+.foot-grid{display:grid;gap:2rem;grid-template-columns:repeat(4,minmax(0,1fr))}
+.site-footer h2{font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 .8rem}
+.site-footer p{margin:0 0 .5rem}
+.site-footer a{text-underline-offset:3px}
+.foot-actions{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem}
+.foot-legal{display:flex;flex-wrap:wrap;gap:.25rem 1rem;align-items:center;margin-top:2.5rem;padding-top:1.4rem;border-top:1px solid var(--foot-line,rgba(255,255,255,.25));font-size:.9rem}
+.foot-legal a,.foot-legal button{display:inline-flex;align-items:center;min-height:44px;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.foot-note{font-size:.85rem;opacity:.9;margin-top:1rem}
+.social{display:flex;gap:.5rem;list-style:none;padding:0;margin:.8rem 0 0}
+.social a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:1px solid currentColor;border-radius:999px;font-size:.8rem;font-weight:700;text-decoration:none}
+@media (max-width:900px){.foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.foot-grid{grid-template-columns:minmax(0,1fr)}}
+/* Consent banner */
+.consent{position:fixed;left:12px;right:12px;bottom:12px;z-index:150;max-width:560px;background:var(--surface);color:var(--ink);border:2px solid var(--ink);border-radius:var(--radius);box-shadow:0 18px 50px rgba(0,0,0,.3);padding:1.1rem 1.2rem}
+.consent[hidden]{display:none}
+.consent h2{font-family:var(--body);font-size:1.05rem;margin:0 0 .4rem;letter-spacing:0;text-transform:none}
+.consent p{margin:0 0 .8rem;font-size:.92rem;line-height:1.5}
+.consent .row{display:flex;flex-wrap:wrap;gap:.5rem}
+.consent button.c-btn{flex:1 1 9rem;min-height:46px;padding:.5rem .9rem;border:2px solid var(--ink);border-radius:var(--radius);background:var(--surface);color:var(--ink);font-weight:700;cursor:pointer}
+.consent button.c-btn.c-main{background:var(--ink);color:var(--surface)}
+.consent .c-manage{background:none;border:0;padding:0;min-height:44px;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700;margin-top:.3rem}
+.consent fieldset{border:1px solid var(--line);border-radius:var(--radius);padding:.6rem .8rem;margin:0 0 .8rem}
+.consent legend{font-weight:700;padding:0 .3rem}
+.consent label{display:flex;gap:.6rem;align-items:flex-start;min-height:44px;padding:.35rem 0;font-size:.92rem}
+.consent input[type=checkbox]{width:22px;height:22px;margin-top:.1rem;flex:none}
+@media (min-width:640px){.consent{left:20px;bottom:20px}}
+/* Legal pages */
+.legal main{padding-top:3rem;padding-bottom:4rem}
+.legal .doc{max-width:46rem}
+.legal h1{font-family:var(--display);font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.08;margin:0 0 .6rem}
+.legal h2{font-family:var(--display);font-size:1.5rem;line-height:1.2;margin:2.4rem 0 .6rem}
+.legal .meta{color:var(--muted);margin:0 0 2rem}
+.legal table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.95rem}
+.legal th,.legal td{text-align:left;vertical-align:top;padding:.6rem .5rem;border-bottom:1px solid var(--line)}
+.legal th{font-size:.8rem;letter-spacing:.06em;text-transform:uppercase}
+.legal .table-wrap{overflow-x:auto}
+.legal .simple-head .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:72px;flex-wrap:wrap}
+.legal .home-link{font-family:var(--display);font-size:1.4rem;text-decoration:none}
+.legal .back{display:inline-flex;align-items:center;min-height:44px;font-weight:700}
+.legal .btn-plain{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.6rem 1.3rem;border:2px solid var(--ink);border-radius:var(--radius);background:var(--ink);color:var(--bg);font-weight:700;cursor:pointer;text-decoration:none}
+.legal .confirm{padding:1.5rem;border:2px solid var(--ink);border-radius:var(--radius);background:var(--surface)}
+
+/* Cantina Zafiro. Concept: the loteria game and papel picado. Full-bleed taco hero with a sticker, menu dealt as numbered loteria cards, run-in "mas del menu" type, color-blocked catering and party sections. */
+:root{--bg:#FFF3DC;--surface:#FFFFFF;--ink:#1D1B4D;--muted:#4A4870;--line:#E7D6B4;--line-strong:#1D1B4D;--magenta:#C2185B;--marigold:#F4A300;--teal:#0A7480;--lime:#8CC63F;--cream:#FFF3DC;--focus:#C2185B;
+--display:"Rozha One","Playfair Display",Georgia,serif;--body:"Karla","Trebuchet MS",system-ui,sans-serif;--radius:14px;--banner-bg:#1D1B4D;--banner-ink:#FFF3DC;color-scheme:light}
+h1,h2,h3{text-wrap:balance;font-weight:400}
+.kicker{font:800 .8rem/1.3 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin:0 0 .9rem}
+.sec-title{font:400 clamp(2.2rem,4.6vw,3.6rem)/1.02 var(--display);margin:0 0 1rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:50px;padding:.6rem 1.5rem;border-radius:999px;border:3px solid var(--ink);background:var(--marigold);color:var(--ink);font:800 1rem/1.1 var(--body);text-decoration:none;cursor:pointer;transition:background-color .15s,color .15s}
+.btn:hover{background:var(--magenta);color:#fff}
+.btn.white{background:#fff}
+.btn.white:hover{background:var(--ink);color:#fff}
+.flags{height:40px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='40' viewBox='0 0 360 40'%3E%3Cpath d='M0 0h360v3H0z' fill='%231D1B4D'/%3E%3Cg%3E%3Cpath d='M4 3h40v26l-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5z' fill='%23C2185B'/%3E%3Cpath d='M64 3h40v26l-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5z' fill='%23F4A300'/%3E%3Cpath d='M124 3h40v26l-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5z' fill='%230A7480'/%3E%3Cpath d='M184 3h40v26l-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5z' fill='%238CC63F'/%3E%3Cpath d='M244 3h40v26l-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5z' fill='%23C2185B'/%3E%3Cpath d='M304 3h40v26l-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5-4 5-4-5z' fill='%23F4A300'/%3E%3C/g%3E%3C/svg%3E") repeat-x left top/360px 40px}
+/* header */
+.site-header{background:var(--bg);border-bottom:3px solid var(--ink)}
+.site-header.scrolled{box-shadow:0 8px 22px rgba(29,27,77,.14)}
+.brand{display:inline-flex;align-items:center;gap:.7rem;text-decoration:none;min-height:48px}
+.badge{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--magenta);color:#fff;border:3px solid var(--ink);font:400 1.15rem/1 var(--display);transition:width .25s,height .25s}
+.scrolled .badge{width:42px;height:42px;font-size:.95rem}
+.brand .nm{font:400 1.6rem/1 var(--display);color:var(--ink)}
+.brand .nm small{display:block;font:800 .75rem/1 var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--magenta);margin-top:.3rem}
+.nav-list a,.nav-list .dd-btn{font-weight:800}
+.nav-list a:hover{color:var(--magenta)}
+.nav-list .dd-btn.btn{margin-left:.5rem;padding:.45rem 1.2rem}
+/* hero */
+.hero{position:relative;min-height:min(90vh,780px);display:flex;align-items:flex-end;color:#fff;background:var(--ink);overflow:hidden}
+.hero > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,18,56,.9) 0%,rgba(20,18,56,.6) 42%,rgba(20,18,56,0) 72%),linear-gradient(0deg,rgba(20,18,56,.75),rgba(20,18,56,0) 45%)}
+.hero .wrap{position:relative;z-index:2;padding-top:6rem;padding-bottom:clamp(2.5rem,6vw,4.5rem)}
+.hero .kicker{color:var(--marigold)}
+.hero h1{font:400 clamp(2.9rem,6.6vw,5.6rem)/1 var(--display);margin:0 0 1.1rem;max-width:13ch}
+.hero h1 em{font-style:normal;color:var(--marigold)}
+.hero .lede{font-size:1.2rem;max-width:32rem;margin:0 0 1.8rem}
+.hero .actions{display:flex;flex-wrap:wrap;gap:1rem}
+.hero .btn.white:hover{background:var(--marigold);color:var(--ink)}
+.sticker{position:absolute;z-index:3;right:clamp(16px,6vw,90px);top:clamp(24px,8vw,90px);width:clamp(8.5rem,14vw,11rem);aspect-ratio:1;display:grid;place-items:center;text-align:center;padding:1.4rem;background:var(--marigold);color:var(--ink);font:400 clamp(1rem,1.6vw,1.25rem)/1.05 var(--display);transform:rotate(12deg);clip-path:polygon(50% 0%,61% 12%,75% 6%,79% 21%,94% 21%,90% 36%,100% 46%,90% 57%,96% 71%,81% 75%,79% 90%,64% 87%,54% 100%,44% 89%,30% 96%,25% 81%,10% 80%,13% 65%,0% 56%,10% 45%,4% 31%,19% 27%,21% 12%,36% 14%)}
+.address-band{background:var(--magenta);color:#fff;border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.address-band .wrap{display:flex;flex-wrap:wrap;gap:.4rem 2rem;justify-content:center;align-items:center;padding-top:.6rem;padding-bottom:.6rem;font-weight:800}
+.address-band a{color:#fff;display:inline-flex;align-items:center;min-height:44px}
+/* loteria */
+.deal-sec{background:var(--teal);color:#fff;padding-top:clamp(3.5rem,7vw,6rem);padding-bottom:clamp(3.5rem,7vw,6rem)}
+.deal-sec .kicker{color:var(--cream)}
+.deal-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:1rem 2rem;margin-bottom:2.6rem}
+.deal-head p{max-width:30rem;margin:0}
+.deal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.6rem;list-style:none;margin:0;padding:0}
+.card{display:flex;flex-direction:column;background:#fff;color:var(--ink);border:4px solid var(--ink);border-radius:var(--radius);padding:.9rem;box-shadow:6px 6px 0 var(--ink);transition:transform .2s}
+.deal li:nth-child(3n+1) .card{transform:rotate(-1.2deg)}.deal li:nth-child(3n+2) .card{transform:rotate(.8deg) translateY(10px)}.deal li:nth-child(3n) .card{transform:rotate(1.4deg)}
+.card:hover{transform:rotate(0) translateY(-4px)!important}
+@media (prefers-reduced-motion:reduce){.card,.card:hover{transition:none}}
+.card .num{display:flex;justify-content:space-between;font:800 .8rem var(--body);letter-spacing:.1em;text-transform:uppercase}
+.card .photo{margin:.6rem 0 .8rem;border:3px solid var(--ink);border-radius:8px;overflow:hidden;aspect-ratio:5/3.6}
+.card .photo img{width:100%;height:100%;object-fit:cover}
+.card h3{font:400 1.5rem/1.05 var(--display);margin:0;text-transform:uppercase;letter-spacing:.02em;text-align:center;padding-bottom:.5rem;border-bottom:3px solid var(--ink)}
+.card p{margin:.6rem 0 .8rem;font-size:.97rem}
+.card .pr{margin-top:auto;display:flex;justify-content:space-between;font-weight:800;border-top:3px dotted var(--ink);padding-top:.5rem}
+.deal-sec .note{margin:3rem 0 0;font-size:.95rem}
+/* run-in menu */
+.more{padding-top:clamp(3.5rem,7vw,6rem);padding-bottom:clamp(3.5rem,7vw,6rem)}
+.runin{font-size:clamp(1.15rem,1.8vw,1.4rem);line-height:1.7;max-width:62rem;margin:0}
+.runin b{font:400 1.15em var(--display);color:var(--magenta);margin-right:.35rem}
+.runin span.p{font-weight:800;margin-left:.2rem}
+.runin .sep{color:var(--marigold);margin:0 .5rem}
+/* drinks */
+.drinks{background:var(--ink);color:var(--cream)}
+.drinks .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(2rem,5vw,4rem);padding-top:clamp(3.5rem,7vw,6rem);padding-bottom:clamp(3.5rem,7vw,6rem);align-items:start}
+.drinks .kicker{color:var(--lime)}
+.drinks .sec-title{color:var(--marigold)}
+.drinks ul{list-style:none;margin:0;padding:0}
+.drinks li{display:flex;justify-content:space-between;gap:1rem;padding:1rem 0;border-bottom:2px dotted rgba(255,243,220,.4)}
+.drinks li b{font:400 1.35rem var(--display);display:block}
+.drinks li span{font-size:.95rem;opacity:.9}
+.drinks li em{font-style:normal;font-weight:800;color:var(--marigold);white-space:nowrap}
+/* slideshow */
+.show{background:var(--marigold);padding-top:clamp(3rem,6vw,5rem);padding-bottom:clamp(3rem,6vw,5rem);border-top:3px solid var(--ink);border-bottom:3px solid var(--ink)}
+.show .frame{border:4px solid var(--ink);border-radius:22px;overflow:hidden;box-shadow:8px 8px 0 var(--ink);background:var(--ink)}
+.show .slides{aspect-ratio:16/8}
+.show .slide{position:absolute;inset:0}
+.show figcaption{position:absolute;left:16px;bottom:16px;background:#fff;color:var(--ink);border:3px solid var(--ink);border-radius:999px;padding:.35rem 1rem;font:400 1.1rem var(--display)}
+.show .slide-controls{margin-top:1.4rem;justify-content:center}
+.show .slide-controls button{background:#fff;border:3px solid var(--ink);color:var(--ink);padding:0 1rem}
+.show .slide-dots button{min-width:48px;font:400 1.05rem var(--display)}
+.show .slide-dots button[aria-current="true"]{background:var(--magenta);color:#fff}
+/* catering + parties */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);border-bottom:3px solid var(--ink)}
+.split figure{margin:0;min-height:30rem;position:relative}
+.split figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.split .copy{padding:clamp(2.5rem,6vw,5rem) clamp(20px,5vw,64px);display:flex;flex-direction:column;justify-content:center}
+.split.pink .copy{background:var(--magenta);color:#fff}
+.split.pink .kicker{color:#FFE7A3}
+.split.lime .copy{background:#E9F3D6}
+.split.flip figure{order:2}
+.split ul{margin:0 0 1.6rem;padding-left:1.2rem}
+.split li{margin-bottom:.4rem}
+.split .actions{display:flex;flex-wrap:wrap;gap:1rem}
+.split.pink .btn{border-color:var(--ink)}
+/* story */
+.story .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,5vw,4rem);align-items:center;padding-top:clamp(3.5rem,7vw,6rem);padding-bottom:clamp(3.5rem,7vw,6rem)}
+.collage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+.collage img{width:100%;aspect-ratio:1;object-fit:cover;border:4px solid var(--ink);border-radius:var(--radius)}
+.collage img:nth-child(1){border-color:var(--marigold);transform:rotate(-1.5deg)}.collage img:nth-child(2){border-color:var(--magenta);transform:rotate(1.5deg) translateY(14px)}
+.collage img:nth-child(3){border-color:var(--lime);transform:rotate(1deg)}.collage img:nth-child(4){border-color:var(--teal);transform:rotate(-1deg) translateY(14px)}
+.story blockquote{margin:1.4rem 0;padding:1.2rem 1.4rem;background:#fff;border:3px solid var(--ink);border-radius:var(--radius);box-shadow:5px 5px 0 var(--magenta);font-size:1.15rem;font-weight:700}
+.story blockquote footer{font-size:.92rem;font-weight:700;color:var(--muted);margin-top:.5rem}
+.big-card{margin:0 auto;max-width:22rem;transform:rotate(3deg);filter:drop-shadow(10px 10px 0 #C2185B)}
+.big-card svg{width:100%;height:auto;display:block}
+/* duo */
+.duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem;padding-bottom:clamp(3.5rem,7vw,6rem)}
+.box{background:#fff;border:4px solid var(--ink);border-radius:var(--radius);padding:clamp(1.4rem,3vw,2.2rem);box-shadow:6px 6px 0 var(--ink)}
+.box h2{font:400 clamp(1.7rem,3vw,2.3rem)/1.08 var(--display);margin:0 0 .8rem}
+.inline-form{display:flex;flex-wrap:wrap;gap:.8rem;align-items:flex-end;margin-top:1rem}
+.inline-form .field{flex:1 1 14rem;margin:0}
+/* visit */
+.visit{background:var(--magenta);color:#fff}
+.visit .wrap{padding-top:clamp(3.5rem,7vw,6rem);padding-bottom:clamp(3.5rem,7vw,6rem)}
+.visit .kicker{color:var(--cream)}
+.visit .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.4rem;margin-top:2rem}
+.visit h3{font:400 1.4rem var(--display);margin:0 0 .7rem;color:#FFE7A3}
+.visit p{margin:0 0 .6rem}
+.visit a:not(.btn){color:#fff}
+.visit table{width:100%;border-collapse:collapse;color:inherit;font:inherit}
+.visit td{padding:.45rem 0;border-bottom:1px dotted rgba(255,255,255,.6)}
+.visit td+td{text-align:right;font-weight:800}
+/* footer */
+.site-footer{background:var(--ink);color:var(--cream);--foot-line:rgba(255,243,220,.3)}
+.site-footer .f-brand{font:400 2rem/1 var(--display);color:var(--marigold);margin:0 0 .6rem}
+.site-footer h2{color:var(--marigold)}
+@media (max-width:900px){
+ .deal{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .drinks .wrap,.split,.story .wrap,.duo{grid-template-columns:minmax(0,1fr)}
+ .split figure,.split.flip figure{order:-1;min-height:20rem}
+ .visit .grid{grid-template-columns:minmax(0,1fr)}
+ .show .slides{aspect-ratio:4/3}
+}
+@media (max-width:600px){.deal{grid-template-columns:minmax(0,1fr)}.hero .wrap{padding-top:9rem}.hero::after{background:linear-gradient(0deg,rgba(20,18,56,.96) 0%,rgba(20,18,56,.88) 48%,rgba(20,18,56,.25) 78%,rgba(20,18,56,0) 100%)}.brand .nm small{display:none}.brand .nm{font-size:1.4rem}.hero h1{font-size:2.6rem}.sticker{top:20px;right:16px;width:7.4rem;padding:1rem;font-size:.95rem}.nav-list .dd-btn.btn{margin-left:0}}
+</style></head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+<section id="consent" class="consent" aria-labelledby="consent-title" hidden>
+ <h2 id="consent-title" tabindex="-1">Cookie choices</h2>
+ <p>This site only stores your cookie choice in your browser. It does not use analytics, advertising or tracking tools. If any are added later, they will only load if you accept them. <a href="cookies.html">Read the Cookie Policy</a>.</p>
+ <div class="row">
+  <button type="button" class="c-btn c-main" id="c-accept">Accept all</button>
+  <button type="button" class="c-btn c-main" id="c-reject">Reject non-essential</button>
+ </div>
+ <button type="button" class="c-manage" id="consent-manage-btn" aria-expanded="false" aria-controls="consent-manage">Manage choices</button>
+ <div id="consent-manage" hidden>
+  <fieldset><legend>Choose what this site may use</legend>
+   <label><input type="checkbox" checked disabled> <span><b>Essential</b> (always on): remembers this choice.</span></label>
+   <label><input type="checkbox" id="c-analytics"> <span><b>Analytics</b>: not used on this site today.</span></label>
+   <label><input type="checkbox" id="c-marketing"> <span><b>Marketing</b>: not used on this site today.</span></label>
+  </fieldset>
+  <button type="button" class="c-btn" id="c-save">Save choices</button>
+ </div>
+</section>
+<p id="consent-saved" class="sr-only" role="status"></p>
+<p id="demo-live" class="sr-only" role="status" aria-live="polite"></p>
+<aside aria-label="Sample notice"><div class="sample-bar" role="note"><strong>Sample design by Preferred Web Solutions.</strong> <span class="sb-long">Cantina Zafiro is a fictional restaurant, not a real business. Photos are for demonstration only.</span><span class="sb-short">Fictional restaurant, not a real business.</span></div></aside>
+<div class="flags" aria-hidden="true"></div>
+<header class="site-header">
+ <div class="wrap bar">
+  <a class="brand" href="#main"><span class="badge" aria-hidden="true">CZ</span><span class="nm">Cantina Zafiro<small>Tacos &middot; tamales &middot; margaritas</small></span></a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span class="lines" aria-hidden="true"><span></span></span>Navigate</button>
+  <nav id="site-nav" class="site-nav" aria-label="Main">
+   <ul class="nav-list">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#drinks">Drinks</a></li>
+    <li><a href="#catering">Catering &amp; parties</a></li>
+    <li><a href="#visit">Hours &amp; location</a></li>
+    <li class="dd"><button class="dd-btn btn nav-cta" type="button" aria-expanded="false" aria-controls="order-menu">Order online<span class="caret" aria-hidden="true"></span></button>
+     <ul class="dd-menu" id="order-menu" hidden>
+      <li><a href="#visit" data-demo="Demo only: pickup ordering is not connected in this sample.">Pickup (demo)<small>Ready in about 20 minutes</small></a></li>
+      <li><a href="#visit" data-demo="Demo only: delivery is not connected in this sample.">Delivery (demo)<small>Through a delivery partner</small></a></li>
+     </ul></li>
+   </ul>
+  </nav>
+ </div>
+</header>
+<main id="main">
+ <section class="hero" aria-labelledby="hero-title">
+  <img src="img/zaf_pastor-1600.jpg" srcset="img/zaf_pastor-800.jpg 800w, img/zaf_pastor-1600.jpg 1600w" width="1600" height="1066" alt="Al pastor tacos topped with onion and cilantro on a wooden board, with red salsa and lime" sizes="100vw" fetchpriority="high">
+  <p class="sticker" aria-hidden="true">Tortillas pressed to order</p>
+  <div class="wrap">
+   <p class="kicker">Family kitchen &middot; Cincinnati, Ohio</p>
+   <h1 id="hero-title">Tacos, tamales &amp; <em>agua fresca</em>, made fresh.</h1>
+   <p class="lede">Corn tortillas pressed to order, salsas made every morning, and a margarita list that goes way past lime.</p>
+   <div class="actions"><a class="btn" href="#visit">Order online</a><a class="btn white" href="#menu">See the menu</a></div>
+  </div>
+ </section>
+ <div class="address-band"><div class="wrap"><span>1207 Mercado Street, Cincinnati</span><span>Tue to Sun from 11am</span><a href="tel:+15135550163">(513) 555-0163</a></div></div>
+
+ <section class="deal-sec" id="menu" aria-labelledby="menu-title">
+  <div class="wrap">
+   <div class="deal-head"><div><p class="kicker">Elige tu carta</p><h2 class="sec-title" id="menu-title">Pick a card. Every one is a plate.</h2></div><p>Our favorites, dealt like a loteria game. Every taco comes on fresh corn tortillas unless you ask for flour.</p></div>
+   <ul class="deal">
+    <li><article class="card"><div class="num"><span>No. 1</span><span>Taco</span></div><figure class="photo"><img src="img/zaf_pastor-1600.jpg" srcset="img/zaf_pastor-800.jpg 800w, img/zaf_pastor-1600.jpg 1600w" width="1600" height="1066" alt="Three al pastor tacos with onion and cilantro" sizes="(max-width:600px) 100vw, (max-width:900px) 50vw, 33vw" loading="lazy"></figure><h3>Al Pastor</h3><p>Marinated pork, pineapple, onion, cilantro, lime.</p><div class="pr"><span>Three tacos</span><span>$11.50</span></div></article></li>
+    <li><article class="card"><div class="num"><span>No. 2</span><span>Taco</span></div><figure class="photo"><img src="img/zaf_crispy-1600.jpg" srcset="img/zaf_crispy-800.jpg 800w, img/zaf_crispy-1600.jpg 1600w" width="1449" height="2576" alt="Three crispy chicken tacos with lettuce, crema and salsa in a metal rack" sizes="(max-width:600px) 100vw, (max-width:900px) 50vw, 33vw" loading="lazy"></figure><h3>Pollo Crujiente</h3><p>Crispy tortilla, grilled chicken, lettuce, crema, salsa roja.</p><div class="pr"><span>Three tacos</span><span>$11.00</span></div></article></li>
+    <li><article class="card"><div class="num"><span>No. 3</span><span>Taco</span></div><figure class="photo"><img src="img/zaf_soft-1600.jpg" srcset="img/zaf_soft-800.jpg 800w, img/zaf_soft-1600.jpg 1600w" width="1600" height="899" alt="Soft flour tacos filled with chicken, tomato, lettuce and avocado" sizes="(max-width:600px) 100vw, (max-width:900px) 50vw, 33vw" loading="lazy"></figure><h3>Pollo Suave</h3><p>Soft flour tortilla, chicken, tomato, lettuce, avocado.</p><div class="pr"><span>Three tacos</span><span>$10.50</span></div></article></li>
+    <li><article class="card"><div class="num"><span>No. 4</span><span>Antojito</span></div><figure class="photo"><img src="img/zaf_dorados-1600.jpg" srcset="img/zaf_dorados-800.jpg 800w, img/zaf_dorados-1600.jpg 1600w" width="1600" height="2396" alt="Golden fried tacos topped with cabbage, radish and crumbled cheese on a wooden board" sizes="(max-width:600px) 100vw, (max-width:900px) 50vw, 33vw" loading="lazy"></figure><h3>Tacos Dorados</h3><p>Fried golden, cabbage, radish, cotija, lime and salsa.</p><div class="pr"><span>Plate of three</span><span>$12.00</span></div></article></li>
+    <li><article class="card"><div class="num"><span>No. 5</span><span>Plato</span></div><figure class="photo"><img src="img/zaf_asada-1600.jpg" srcset="img/zaf_asada-800.jpg 800w, img/zaf_asada-1600.jpg 1600w" width="1600" height="1320" alt="Steak and avocado tacos in a rack with pickled red onions" sizes="(max-width:600px) 100vw, (max-width:900px) 50vw, 33vw" loading="lazy"></figure><h3>Carne Asada</h3><p>Grilled steak, avocado, pickled red onion, salsa macha.</p><div class="pr"><span>Three tacos</span><span>$14.50</span></div></article></li>
+    <li><article class="card"><div class="num"><span>No. 6</span><span>Desayuno</span></div><figure class="photo"><img src="img/zaf_chilaquiles-1600.jpg" srcset="img/zaf_chilaquiles-800.jpg 800w, img/zaf_chilaquiles-1600.jpg 1600w" width="1600" height="1329" alt="Chilaquiles in red salsa topped with a fried egg, cotija and cilantro, with beans and green crema" sizes="(max-width:600px) 100vw, (max-width:900px) 50vw, 33vw" loading="lazy"></figure><h3>Chilaquiles</h3><p>Tortilla chips in red salsa, a fried egg, queso fresco, beans.</p><div class="pr"><span>Weekends until 2pm</span><span>$12.00</span></div></article></li>
+   </ul>
+   <p class="note">Prices and availability can change. Please tell us about any allergies before ordering.</p>
+  </div>
+ </section>
+
+ <section class="more" aria-labelledby="more-title">
+  <div class="wrap">
+   <p class="kicker">M&aacute;s del men&uacute;</p>
+   <h2 class="sec-title" id="more-title">And everything else.</h2>
+   <p class="runin"><b>Tamales</b>red pork or poblano &amp; cheese, with crema<span class="p">$9.50</span><span class="sep" aria-hidden="true">&#10022;</span><b>Elote</b>grilled corn, lime crema, cotija, chile<span class="p">$5</span><span class="sep" aria-hidden="true">&#10022;</span><b>Guacamole</b>made when you order, with warm chips<span class="p">$9</span><span class="sep" aria-hidden="true">&#10022;</span><b>Enchiladas verdes</b>chicken, tomatillo salsa, rice, black beans<span class="p">$14.50</span><span class="sep" aria-hidden="true">&#10022;</span><b>Salsa bar</b>roja, verde, macha and habanero, free with any order<span class="sep" aria-hidden="true">&#10022;</span><b>Para los ni&ntilde;os</b>cheese quesadilla with rice<span class="p">$6</span><span class="sep" aria-hidden="true">&#10022;</span><b>Churros</b>cinnamon sugar, chocolate for dipping<span class="p">$6</span></p>
+  </div>
+ </section>
+
+ <section class="drinks" id="drinks" aria-labelledby="drinks-title">
+  <div class="wrap">
+   <div><p class="kicker">Bebidas</p><h2 class="sec-title" id="drinks-title">Way past the lime.</h2><p>Fresh-squeezed and shaken to order. Every margarita can be made without alcohol.</p></div>
+   <ul>
+    <li><div><b>House Margarita</b><span>Blanco tequila, fresh lime, agave. Rocks or up.</span></div><em>$10</em></li>
+    <li><div><b>Tamarindo</b><span>Tamarind, chile-salt rim, reposado.</span></div><em>$12</em></li>
+    <li><div><b>Paloma</b><span>Grapefruit, lime, soda, a pinch of salt.</span></div><em>$11</em></li>
+    <li><div><b>Agua Fresca</b><span>Hibiscus, horchata or watermelon.</span></div><em>$4</em></li>
+    <li><div><b>Mexican Hot Chocolate</b><span>Cinnamon and a little heat.</span></div><em>$5</em></li>
+   </ul>
+  </div>
+ </section>
+
+ <section class="show" aria-labelledby="show-title">
+  <div class="wrap">
+   <p class="kicker" style="color:var(--ink)">La galer&iacute;a</p>
+   <h2 class="sec-title" id="show-title">Fresh off the comal.</h2>
+   <div class="slideshow" data-slideshow>
+    <div class="frame"><div class="slides" aria-live="off">
+     <figure class="slide"><img src="img/zaf_soft-1600.jpg" srcset="img/zaf_soft-800.jpg 800w, img/zaf_soft-1600.jpg 1600w" width="1600" height="899" alt="Soft chicken tacos lined up on a dark stone plate" sizes="(max-width:1200px) 100vw, 1140px" loading="lazy"><figcaption>Pollo suave</figcaption></figure>
+     <figure class="slide" hidden><img src="img/zaf_chilaquiles-1600.jpg" srcset="img/zaf_chilaquiles-800.jpg 800w, img/zaf_chilaquiles-1600.jpg 1600w" width="1600" height="1329" alt="Chilaquiles with a fried egg" sizes="(max-width:1200px) 100vw, 1140px" loading="lazy"><figcaption>Weekend chilaquiles</figcaption></figure>
+     <figure class="slide" hidden><img src="img/zaf_dorados-1600.jpg" srcset="img/zaf_dorados-800.jpg 800w, img/zaf_dorados-1600.jpg 1600w" width="1600" height="2396" alt="Tacos dorados with cabbage and radish" sizes="(max-width:1200px) 100vw, 1140px" loading="lazy"><figcaption>Tacos dorados</figcaption></figure>
+     <figure class="slide" hidden><img src="img/zaf_asada-1600.jpg" srcset="img/zaf_asada-800.jpg 800w, img/zaf_asada-1600.jpg 1600w" width="1600" height="1320" alt="Carne asada tacos with avocado" sizes="(max-width:1200px) 100vw, 1140px" loading="lazy"><figcaption>Carne asada</figcaption></figure>
+     <figure class="slide" hidden><img src="img/zaf_crispy-1600.jpg" srcset="img/zaf_crispy-800.jpg 800w, img/zaf_crispy-1600.jpg 1600w" width="1449" height="2576" alt="Crispy chicken tacos with salsas" sizes="(max-width:1200px) 100vw, 1140px" loading="lazy"><figcaption>Pollo crujiente</figcaption></figure>
+    </div></div>
+    <div class="slide-controls">
+     <button class="slide-prev" type="button" aria-label="Previous photo">&larr;</button>
+     <ul class="slide-dots"><li><button type="button" aria-label="Photo 1 of 5">1</button></li><li><button type="button" aria-label="Photo 2 of 5">2</button></li><li><button type="button" aria-label="Photo 3 of 5">3</button></li><li><button type="button" aria-label="Photo 4 of 5">4</button></li><li><button type="button" aria-label="Photo 5 of 5">5</button></li></ul>
+     <button class="slide-next" type="button" aria-label="Next photo">&rarr;</button>
+     <button class="slide-play" type="button" aria-label="Pause slideshow"><span class="lbl">Pause</span></button>
+    </div>
+   </div>
+  </div>
+ </section>
+
+ <section class="split pink" id="catering" aria-labelledby="catering-title">
+  <figure><img src="img/zaf_dorados-1600.jpg" srcset="img/zaf_dorados-800.jpg 800w, img/zaf_dorados-1600.jpg 1600w" width="1600" height="2396" alt="Platter of tacos dorados with lime wedges" sizes="(max-width:900px) 100vw, 50vw" loading="lazy"></figure>
+  <div class="copy">
+   <p class="kicker">Catering</p>
+   <h2 class="sec-title" id="catering-title">A taco bar for your next event.</h2>
+   <p>We bring the comal, the salsas and the cooks. Office lunches, graduations and backyard parties, from 20 to 200 guests.</p>
+   <ul><li>Build-your-own taco bar, two proteins</li><li>Trays of tamales, rice and beans</li><li>Agua fresca by the gallon</li></ul>
+   <div class="actions"><a class="btn" href="#catering-form">Plan my catering</a></div>
+  </div>
+ </section>
+ <section class="split lime flip" aria-labelledby="party-title">
+  <figure><img src="img/zaf_asada-1600.jpg" srcset="img/zaf_asada-800.jpg 800w, img/zaf_asada-1600.jpg 1600w" width="1600" height="1320" alt="Steak tacos and salsas being served" sizes="(max-width:900px) 100vw, 50vw" loading="lazy"></figure>
+  <div class="copy" id="catering-form">
+   <p class="kicker">Parties &amp; catering inquiries</p>
+   <h2 class="sec-title" id="party-title">Book the back room.</h2>
+   <p>The back room seats 40, with its own margarita pitcher service. Tell us about your event and we will call you back.</p>
+   <form data-demo-form novalidate aria-label="Party or catering inquiry">
+    <p><span class="demo-tag">Working demo</span> Not connected yet.</p>
+    <div class="field"><label for="c-name">Name</label><input id="c-name" name="name" required autocomplete="name"></div>
+    <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" required autocomplete="tel"></div>
+    <div class="field"><label for="c-type">What are you planning?</label><select id="c-type" name="type"><option>Catering delivered to me</option><option>Party in the back room</option></select></div>
+    <button class="btn" type="submit">Send inquiry</button>
+    <p class="form-status" role="status" aria-live="polite"></p>
+   </form>
+  </div>
+ </section>
+
+ <section class="story" aria-labelledby="story-title">
+  <div class="wrap">
+   <div>
+    <p class="kicker">Nuestra historia</p>
+    <h2 class="sec-title" id="story-title">Recipes from our family table.</h2>
+    <p>The Zafiro family brought their recipes from Puebla in 1998 and sold tamales from a cooler on Saturday mornings. The cantina opened in 2011, and the tortilla press has not stopped since.</p>
+    <blockquote><p>"If the tortilla is not fresh, nothing else matters."</p><footer>Lupe Zafiro, owner</footer></blockquote>
+    <p class="hint">Family, story and quote are invented for this sample. On a real site, they come from the owner.</p>
+   </div>
+   <figure class="big-card">
+    <svg viewBox="0 0 300 440" role="img" aria-labelledby="bc-t"><title id="bc-t">Illustrated loteria card: number 27, El Zafiro, a blue gem with sun rays</title>
+     <rect x="6" y="6" width="288" height="428" rx="18" fill="#FFFFFF" stroke="#1D1B4D" stroke-width="8"/>
+     <rect x="24" y="52" width="252" height="300" rx="8" fill="#0A7480" stroke="#1D1B4D" stroke-width="5"/>
+     <g stroke="#F4A300" stroke-width="10" stroke-linecap="round"><path d="M150 80v34M150 286v34M74 202h34M192 202h34M96 148l24 24M180 232l24 24M204 148l-24 24M120 232l-24 24"/></g>
+     <path d="M150 128l58 44-58 112-58-112z" fill="#3D5AFE" stroke="#1D1B4D" stroke-width="6" stroke-linejoin="round"/>
+     <path d="M92 172h116M150 128l-24 44 24 112 24-112z" fill="none" stroke="#1D1B4D" stroke-width="4" stroke-linejoin="round"/>
+     <path d="M126 172l24-44 24 44z" fill="#8FA5FF"/>
+     <circle cx="60" cy="88" r="10" fill="#C2185B"/><circle cx="240" cy="316" r="10" fill="#8CC63F"/><circle cx="240" cy="88" r="7" fill="#FFF3DC"/><circle cx="60" cy="316" r="7" fill="#FFF3DC"/>
+     <text x="30" y="38" font-family="Karla,sans-serif" font-weight="800" font-size="20" fill="#1D1B4D">No. 27</text>
+     <text x="270" y="38" text-anchor="end" font-family="Karla,sans-serif" font-weight="800" font-size="20" fill="#C2185B">&#9679;</text>
+     <line x1="24" y1="370" x2="276" y2="370" stroke="#1D1B4D" stroke-width="5"/>
+     <text x="150" y="412" text-anchor="middle" font-family="Rozha One,serif" font-size="40" fill="#1D1B4D">EL ZAFIRO</text>
+    </svg>
+   </figure>
+  </div>
+ </section>
+
+ <section aria-label="Reviews and email list">
+  <div class="wrap duo">
+   <div class="box"><p class="kicker">Lo que dicen</p><h2>Real reviews from real neighbors.</h2><p>A real site links to the restaurant's own Google and Yelp pages and shows its actual star rating. We never write reviews or copy them from other sites.</p><a class="btn white" href="#main" data-demo="Demo only: this would open the restaurant's Google reviews.">Read reviews on Google (demo)</a></div>
+   <div class="box"><p class="kicker">Taco Tuesday list</p><h2>Specials, first.</h2><p>One email a week with the Tuesday special and new margaritas. Unsubscribe any time.</p>
+    <form class="inline-form" data-demo-form novalidate>
+     <div class="field"><label for="n-email">Email address</label><input id="n-email" name="email" type="email" required autocomplete="email"></div>
+     <button class="btn" type="submit">Join the list</button>
+     <p class="form-status" role="status" aria-live="polite" style="flex-basis:100%;margin:0"></p>
+    </form></div>
+  </div>
+ </section>
+
+ <section class="visit" id="visit" aria-labelledby="visit-title">
+  <div class="wrap">
+   <p class="kicker">Ven a comer</p>
+   <h2 class="sec-title" id="visit-title">Come hungry.</h2>
+   <div class="grid">
+    <div><h3>Hours</h3><table><tbody>
+     <tr><td>Tuesday to Thursday</td><td>11am to 9pm</td></tr>
+     <tr><td>Friday &amp; Saturday</td><td>11am to 11pm</td></tr>
+     <tr><td>Sunday</td><td>10am to 8pm</td></tr>
+     <tr><td>Monday</td><td>Closed</td></tr></tbody></table></div>
+    <div><h3>Location</h3><p>1207 Mercado Street<br>Cincinnati, Ohio 45202</p><p>Free parking lot next door.</p><a class="btn white" href="#visit" data-demo="Demo only: this would open driving directions.">Get directions (demo)</a></div>
+    <div><h3>Order</h3><p><a href="tel:+15135550163">(513) 555-0163</a></p><p>Pickup in about 20 minutes, or delivery through a partner.</p><a class="btn" href="#visit" data-demo="Demo only: online ordering is not connected in this sample.">Order online</a></div>
+   </div>
+   <p style="margin-top:2rem;font-size:.9rem">Sample address, hours and phone number. On a real site, these are confirmed with the owner.</p>
+  </div>
+ </section>
+</main>
+<footer class="site-footer">
+ <div class="wrap">
+  <div class="foot-grid">
+   <div><p class="f-brand">Cantina Zafiro</p><p>Tacos, tamales &amp; margaritas.</p><div class="foot-actions"><a class="btn" href="#visit">Order online</a></div></div>
+   <div><h2>Location</h2><p>1207 Mercado Street<br>Cincinnati, Ohio 45202</p></div>
+   <div><h2>Hours</h2><p>Tue to Thu, 11am to 9pm<br>Fri &amp; Sat, 11am to 11pm<br>Sun, 10am to 8pm</p></div>
+   <div><h2>Contact</h2><p><a href="tel:+15135550163">(513) 555-0163</a></p><ul class="social"><li><a href="#main" data-demo="Demo only: this would open Instagram."><span aria-hidden="true">IG</span><span class="sr-only">Instagram (demo)</span></a></li><li><a href="#main" data-demo="Demo only: this would open TikTok."><span aria-hidden="true">TT</span><span class="sr-only">TikTok (demo)</span></a></li></ul></div>
+  </div>
+  <nav class="foot-legal" aria-label="Legal">
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms &amp; Conditions</a>
+  <a href="cookies.html">Cookie Policy</a>
+  <a href="accessibility.html">Accessibility statement</a>
+  <a href="report.html">Report a website issue</a>
+  <button type="button" data-cookie-settings>Cookie settings</button>
+ </nav>
+  <p class="foot-note">Sample website designed by Preferred Web Solutions &middot; <a href="mailto:preferredwebsolutions@gmail.com">preferredwebsolutions@gmail.com</a>. Cantina Zafiro is a made-up business used to show what a restaurant site can look like. Menu, prices, hours, address and story are invented.</p>
+ </div>
+</footer>
+
+<script>
+(function(){
+  var KEY='pws-consent', VER='1.0';
+  function lsGet(){try{return window.localStorage.getItem(KEY)}catch(e){return null}}
+  function lsSet(v){try{window.localStorage.setItem(KEY,v)}catch(e){}}
+  var banner=document.getElementById('consent');
+  var opener=null;
+  function current(){try{var v=JSON.parse(lsGet());return v&&v.version===VER?v:null}catch(e){return null}}
+  function showManage(on){var p=document.getElementById('consent-manage');var b=document.getElementById('consent-manage-btn');if(!p)return;p.hidden=!on;b.setAttribute('aria-expanded',on?'true':'false');}
+  function openBanner(fromUser){
+    if(!banner)return;
+    var c=current();
+    if(c){document.getElementById('c-analytics').checked=!!c.analytics;document.getElementById('c-marketing').checked=!!c.marketing;}
+    banner.hidden=false;
+    if(fromUser){opener=document.activeElement;showManage(true);document.getElementById('consent-title').focus();}
+  }
+  function save(a,m){
+    lsSet(JSON.stringify({version:VER,essential:true,analytics:a,marketing:m,savedAt:new Date().toISOString()}));
+    banner.hidden=true;showManage(false);
+    var s=document.getElementById('consent-saved');if(s){s.textContent='Your cookie choice was saved.';}
+    if(opener&&opener.focus){opener.focus();opener=null;}
+    // This site loads no analytics or marketing tools. If any are added later, load them here only when a or m is true.
+  }
+  if(banner){
+    document.getElementById('c-accept').addEventListener('click',function(){save(true,true)});
+    document.getElementById('c-reject').addEventListener('click',function(){save(false,false)});
+    document.getElementById('c-save').addEventListener('click',function(){save(document.getElementById('c-analytics').checked,document.getElementById('c-marketing').checked)});
+    document.getElementById('consent-manage-btn').addEventListener('click',function(){var p=document.getElementById('consent-manage');showManage(p.hidden)});
+    document.querySelectorAll('[data-cookie-settings]').forEach(function(b){b.addEventListener('click',function(){openBanner(true)})});
+    if(!current())openBanner(false);
+  }
+  // Header: shrink on scroll
+  var header=document.querySelector('.site-header');
+  if(header){var onS=function(){header.classList.toggle('scrolled',window.scrollY>40)};window.addEventListener('scroll',onS,{passive:true});onS();}
+  // Mobile menu
+  var toggle=document.querySelector('.menu-toggle'),nav=document.getElementById('site-nav');
+  if(toggle&&nav){
+    var mq=window.matchMedia('(max-width:900px)');
+    var setOpen=function(o){toggle.setAttribute('aria-expanded',o?'true':'false');nav.setAttribute('data-open',o?'true':'false');};
+    var sync=function(){if(!mq.matches){nav.removeAttribute('data-open');toggle.setAttribute('aria-expanded','false')}else if(!nav.hasAttribute('data-open')){setOpen(false)}};
+    toggle.addEventListener('click',function(){setOpen(toggle.getAttribute('aria-expanded')!=='true')});
+    nav.addEventListener('click',function(e){if(e.target.closest('a')&&mq.matches)setOpen(false)});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&mq.matches&&toggle.getAttribute('aria-expanded')==='true'){setOpen(false);toggle.focus();}});
+    if(mq.addEventListener)mq.addEventListener('change',sync);sync();
+  }
+  // Dropdowns
+  document.querySelectorAll('.dd').forEach(function(dd){
+    var btn=dd.querySelector('.dd-btn'),menu=dd.querySelector('.dd-menu');
+    var set=function(o){btn.setAttribute('aria-expanded',o?'true':'false');menu.hidden=!o;};
+    btn.addEventListener('click',function(){set(menu.hidden)});
+    dd.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){set(false);btn.focus();}});
+    document.addEventListener('click',function(e){if(!dd.contains(e.target))set(false)});
+    dd.addEventListener('focusout',function(e){if(e.relatedTarget&&!dd.contains(e.relatedTarget))set(false)});
+  });
+  // Demo links: explain instead of navigating
+  document.querySelectorAll('[data-demo]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var live=document.getElementById('demo-live');if(live){live.textContent='';setTimeout(function(){live.textContent=a.getAttribute('data-demo')},40);} });});
+  // Demo forms
+  document.querySelectorAll('form[data-demo-form]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var s=f.querySelector('.form-status');if(!f.checkValidity()){f.reportValidity();return;}s.textContent='This is a working demo and is not connected yet, so nothing was sent.';});});
+  // Slideshows
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-slideshow]').forEach(function(root){
+    var slides=[].slice.call(root.querySelectorAll('.slide')),dots=[].slice.call(root.querySelectorAll('.slide-dots button'));
+    var play=root.querySelector('.slide-play'),live=root.querySelector('.slides'),i=0,timer=null,playing=!reduce;
+    function show(n){i=(n+slides.length)%slides.length;slides.forEach(function(s,k){s.hidden=k!==i});dots.forEach(function(d,k){if(k===i)d.setAttribute('aria-current','true');else d.removeAttribute('aria-current')});}
+    function stop(){clearInterval(timer);timer=null;}
+    function start(){stop();if(playing)timer=setInterval(function(){show(i+1)},7000);}
+    function setPlaying(p){playing=p;play.setAttribute('aria-label',p?'Pause slideshow':'Play slideshow');play.querySelector('.lbl').textContent=p?'Pause':'Play';live.setAttribute('aria-live',p?'off':'polite');start();}
+    root.querySelector('.slide-prev').addEventListener('click',function(){show(i-1);});
+    root.querySelector('.slide-next').addEventListener('click',function(){show(i+1);});
+    dots.forEach(function(d,k){d.addEventListener('click',function(){show(k)})});
+    play.addEventListener('click',function(){setPlaying(!playing)});
+    root.addEventListener('mouseenter',stop);root.addEventListener('mouseleave',start);
+    root.addEventListener('focusin',stop);root.addEventListener('focusout',function(e){if(!root.contains(e.relatedTarget))start()});
+    show(0);setPlaying(playing);
+  });
+  // Marquee pause
+  document.querySelectorAll('.marquee').forEach(function(m){var b=m.querySelector('.marquee-pause');if(!b)return;if(reduce){b.hidden=true;return;}b.addEventListener('click',function(){var p=m.classList.toggle('paused');b.setAttribute('aria-pressed',p?'true':'false');b.textContent=p?'Play':'Pause';});});
+  // Report form
+  var rf=document.getElementById('report-form');
+  if(rf){var pf=document.getElementById('r-page');if(pf&&!pf.value)pf.value=document.referrer||'';
+    rf.addEventListener('submit',function(e){e.preventDefault();if(!rf.checkValidity()){rf.reportValidity();return;}
+      var st=rf.querySelector('.form-status');st.textContent='Sending...';
+      fetch(rf.action,{method:'POST',body:new FormData(rf),headers:{'Accept':'application/json'}}).then(function(r){
+        if(!r.ok)throw new Error('bad');var c=document.getElementById('report-confirm');rf.hidden=true;c.hidden=false;c.querySelector('h2').focus();
+      }).catch(function(){st.textContent='Sorry, the report could not be sent from here. Please email preferredwebsolutions@gmail.com instead.';});
+    });}
+})();
+</script>
+</body>
+</html>
