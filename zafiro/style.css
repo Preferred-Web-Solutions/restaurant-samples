@@ -33,7 +33,7 @@ ul{margin:0;padding:0}
 .nav a:not(.btn):hover{text-decoration:underline;text-decoration-thickness:2px}
 .nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:8px}
 .menu-btn{display:none;align-items:center;gap:.5rem;min-height:44px;min-width:44px;padding:.3rem .85rem;border:2px solid currentColor;background:transparent;border-radius:var(--radius);cursor:pointer;font-weight:700}
-.menu-btn i,.menu-btn i::before,.menu-btn i::after{display:block;width:18px;height:2px;background:currentColor;position:relative;content:""}
+.menu-btn i,.menu-btn i::before,.menu-btn i::after{display:block;width:18px;flex:none;height:2px;background:currentColor;position:relative;content:""}
 .menu-btn i::before{position:absolute;top:-6px}.menu-btn i::after{position:absolute;top:6px}
 .nav-end{display:flex;align-items:center;gap:.5rem}
 @media (max-width:520px){.logo{font-size:1.2rem}.logo-sfx{display:none}}
@@ -61,6 +61,20 @@ ul{margin:0;padding:0}
 .dd-menu b{display:block}.dd-menu span{font-size:.88rem;color:var(--muted)}
 .dd-btn::after{content:"";width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px)}
 .dd-btn[aria-expanded="true"]::after{transform:rotate(225deg)}
+/* services mega dropdown (contractors) */
+.sv .dd-btn{background:transparent;border:0;color:inherit;font-weight:600;font-size:.97rem;min-height:44px;padding:0 .8rem;border-radius:0;gap:.4rem}
+.sv .dd-btn[data-cur]{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:8px}
+.sv .dd-menu{left:0;right:auto;min-width:min(44rem,90vw);display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.4rem 1rem;padding:1rem 1.2rem 1.2rem}
+.sv .dd-menu[hidden]{display:none}
+.sv-g{display:flex;flex-direction:column}
+.sv-g b{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:.3rem .8rem}
+.sv .dd-menu a{display:block;padding:.5rem .8rem;min-height:44px;text-decoration:none;font-weight:600;border-radius:6px}
+.sv .dd-menu a:hover{background:var(--soft)}
+.sv-all{grid-column:1/-1;border-top:1px solid var(--line);margin-top:.4rem;padding-top:.7rem!important;min-height:48px}
+@media (max-width:980px){.sv .dd-btn{width:100%;justify-content:space-between;padding:0 .25rem;min-height:48px;border-bottom:1px solid var(--head-line,var(--line))}.sv .dd-menu{position:static;box-shadow:none;border:0;background:transparent;color:inherit;min-width:0;padding:.3rem 0 .6rem;grid-template-columns:minmax(0,1fr)}.sv .dd-menu a{padding:.4rem 1rem}.sv .dd-menu a:hover{background:rgba(127,127,127,.18)}.sv-g b{color:inherit;opacity:.8}.sv-all{border-top-color:rgba(127,127,127,.4)}}
+.crumbs{display:flex;flex-wrap:wrap;gap:.2rem .6rem;list-style:none;padding:0;align-items:center;font-size:.92rem;margin-bottom:1rem}
+.crumbs li+li::before{content:"/";margin-right:.6rem;opacity:.6}
+.crumbs a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px}
 /* footer */
 .site-footer{background:var(--foot-bg,var(--ink));color:var(--foot-ink,var(--bg));padding-top:3.5rem;padding-bottom:2rem}
 .foot-grid{display:grid;grid-template-columns:minmax(0,1.3fr) repeat(3,minmax(0,1fr));gap:2.25rem}
